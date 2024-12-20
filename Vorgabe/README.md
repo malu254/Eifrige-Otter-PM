@@ -1,4 +1,6 @@
-# Anforderungen der BBQ GmbH
+# Anforderungen der BBQ GmbH #
+
+## Basis Anforderungen ##
 
 - [ ] Einhaltung aller Regeln des deutschen Arbeitszeitgesetzes (ArbZG)  
   [Arbeitszeitgesetz](https://www.gesetze-im-internet.de/arbzg/BJNR117100994.html)
