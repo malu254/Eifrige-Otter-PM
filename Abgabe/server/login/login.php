@@ -67,6 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
 
 <body>
+<h1>Test für GitHub Sync</h1>
     <form method="post">
         <div class="login_card">
                 <label id="logo"><?php echo $loginSeite; ?> Anmeldung</label>
