@@ -1,0 +1,108 @@
+
+:root{
+    --color-darkest: #A59D84;
+    --color-dark: #C1BAA1;
+    --color-default: #D7D3BF;
+    --color-light: #ECEBDE;
+}
+*{
+    margin:0;
+}
+
+body {
+    background-color: var(--color-darkest);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto 1fr 1fr 1fr auto;
+    grid-template-areas:
+        "head head head head head"
+        "main main main main aside"
+        "main main main main aside"
+        "main main main main aside"
+        "footer footer footer footer footer";
+    min-height: 100vh;
+    min-width: 100vh;
+}
+
+header {
+    grid-area: head;
+}
+
+main{
+    grid-area: main;
+    display: flex;
+    justify-content: center;
+}
+
+aside{
+    margin:1em;
+    background-color: var(--color-dark);
+    grid-area: aside;
+}
+
+footer{
+    grid-area: footer;
+    background-color: red;
+}
+
+#tabelle {
+    margin:1em;
+    background-color: var(--color-dark);
+    flex-grow: 6;
+    padding: 3em;
+}
+
+table {
+    background-color: var(--color-dark);
+}
+
+
+
+#button-kalender {
+    margin:1em;
+    background-color: var(--color-dark);
+    flex-grow: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#kalender-box{
+    flex-grow: 1;
+}
+#buttons{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+button{
+    margin: 0.75em;
+    
+}
+
+#kalender{
+    width: 100%;
+    height: 70%;
+}
+
+/*Logout Position und Bildeinstellungen*/
+
+.abmeldeButton {
+    position: absolute;
+    top: 5px; /* Abstand vom oberen Rand */
+    right: 5px; /* Abstand vom rechten Rand */
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+.logoutBild{
+    height: 30px; 
+    width: 30px;
+}
