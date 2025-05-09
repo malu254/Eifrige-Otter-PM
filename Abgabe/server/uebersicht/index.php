@@ -79,7 +79,7 @@
         <table border="">
             <tr>
                 <th>Datum</th>
-                <th>Aktion</th>
+                <th>Kommen/Gehen</th>
                 <th>Uhrzeit</th>
             </tr>
             <?php foreach ($eintraege as $eintrag): 
