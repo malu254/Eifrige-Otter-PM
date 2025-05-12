@@ -43,5 +43,5 @@
     $stmt->close();
     $conn->close();
 
-    include 'index.html';
+    include 'uebersicht.html';
 ?>
