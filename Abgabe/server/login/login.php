@@ -2,6 +2,7 @@
 
 include("/home/admin/datenbank_verbindung.php");
 
+
 session_start();
 
 $empfangeneDaten = $_GET['data'];
@@ -54,29 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
         $error = "Falscher Benutzername!";
     }
 }
+
+include 'login.html';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $loginSeite; ?> Anmeldung</title>
-    <link rel="stylesheet" type="text/css" href="../webseite/style/login.css" />
-</head>
-
-
-<body>
-    <form method="post">
-        <div class="login_card">
-                <label id="logo"><?php echo $loginSeite; ?> Anmeldung</label>
-                <input type="text" maxlength="35" name="benutzernameFormular" placeholder="Benutzername" id="bName">
-                <input type="password" name="passwortFormular" placeholder="Passwort" id="passwort">
-                <input type="submit" name="submit" value="Anmelden" id="submit_button">
-                <div style="font-size:11px; color:#cc0000; margin-top:10px"><?php echo isset($error) ? htmlspecialchars($error) : ''; ?></div>
-        </div>
-    </form>
-</body>
-
-</html
-
