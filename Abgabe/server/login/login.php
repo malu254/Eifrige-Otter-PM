@@ -7,6 +7,7 @@ session_start();
 
 $empfangeneDaten = $_GET['data'];
 $loginSeite = $_GET['site'];
+$error = $_GET['error'];
 
 // Überprüft, ob die Anfrage per POST gesendet wurde
 if ($_SERVER["REQUEST_METHOD"] == "POST") 

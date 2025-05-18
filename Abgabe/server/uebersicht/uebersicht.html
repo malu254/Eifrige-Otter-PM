@@ -31,31 +31,62 @@
 
     <main>
         <section id="tabelle">
-            <button id="vorheriges">früher</button>
-            <input type="date" name="date" id="">
-            <button id="naechstes">später</button>
-        <table border="">
-            <tr>
-                <th>Datum</th>
-                <th>Kommen/Gehen</th>
-                <th>Uhrzeit</th>
-            </tr>
-            <?php foreach ($eintraege as $eintrag): 
-                $datum = date("d.m.Y", strtotime($eintrag['zeitpunkt']));
-                $uhrzeit = date("H:i", strtotime($eintrag['zeitpunkt']));
-            ?>
+            <form method="get" id="datumForm">
+                <button type="button" id="vorheriges">früher</button>
+                <input type="date" name="date" id="datumInput" value="<?= isset($_GET['date']) ? $_GET['date'] : date('Y-m-d') ?>">
+                <button type="button" id="naechstes">später</button>
+            </form>
+
+            <table border="">
                 <tr>
-                    <td><?= $datum ?></td>
-                    <td><?= $eintrag['aktion'] ?></td>
-                    <td><?= $uhrzeit ?></td>
+                    <th>Datum</th>
+                    <th>Kommen/Gehen</th>
+                    <th>Uhrzeit</th>
                 </tr>
-            <?php endforeach; ?>
-        </table>
+                <?php
+                $ausgewaehltesDatum = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
 
-        <button id="kommen">kommen</button>
-        <button id="gehen">gehen</button>
+                foreach ($eintraege as $eintrag): 
+                    $eintragsDatum = date("Y-m-d", strtotime($eintrag['zeitpunkt']));
+                    if ($eintragsDatum === $ausgewaehltesDatum):
+                        $datum = date("d.m.Y", strtotime($eintrag['zeitpunkt']));
+                        $uhrzeit = date("H:i", strtotime($eintrag['zeitpunkt']));
+                ?>
+                        <tr>
+                            <td><?= $datum ?></td>
+                            <td><?= $eintrag['aktion'] ?></td>
+                            <td><?= $uhrzeit ?></td>
+                        </tr>
+                <?php 
+                    endif;
+                endforeach;
+                ?>
+            </table>
 
+             <form method="post">
+                    <button type="submit" name="aktion" value="Kommen">Kommen</button>
+                    <button type="submit" name="aktion" value="Gehen">Gehen</button>
+            </form>
         </section>
+
+       
+
+        <script>
+            const datumInput = document.getElementById('datumInput');
+            const form = document.getElementById('datumForm');
+            const vorherBtn = document.getElementById('vorheriges');
+            const naechstesBtn = document.getElementById('naechstes');
+
+            function verschiebeDatum(tage) {
+                const aktuellesDatum = new Date(datumInput.value);
+                aktuellesDatum.setDate(aktuellesDatum.getDate() + tage);
+                datumInput.value = aktuellesDatum.toISOString().split('T')[0];
+                form.submit();
+            }
+
+            vorherBtn.addEventListener('click', () => verschiebeDatum(-1));
+            naechstesBtn.addEventListener('click', () => verschiebeDatum(1));
+        </script>
     </main>
 
     <aside>
@@ -64,9 +95,8 @@
                 <dt>ID</dt>
                 <dd>32450896798023576</dd>
                 <dt>Modell</dt>
-                <dd>35h</dd>
-                <dt>Saldo</dt>
-                <dd>-5:32</dd>
+                <dd><?= $stundenwoche ?></dd>
+                <dd><?= $zeitkonto ?></dd>
 
             </dl>
         </section>

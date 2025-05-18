@@ -16,6 +16,7 @@
                 <input type="text" maxlength="35" name="benutzernameFormular" placeholder="Benutzername" id="bName">
                 <input type="password" name="passwortFormular" placeholder="Passwort" id="passwort">
                 <input type="submit" name="submit" value="Anmelden" id="submit_button">
+                <a href="registrieren.php?data=<?php echo $empfangeneDaten; ?>" div style="text-decoration: none; font-size:15px;margin-top:10px">Kein Account ? - Registrieren</a>
                 <div style="font-size:11px; color:#cc0000; margin-top:10px"><?php echo isset($error) ? htmlspecialchars($error) : ''; ?></div>
         </div>
     </form>
