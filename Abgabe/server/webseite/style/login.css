@@ -1,97 +1,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
-:root {
-    --color-text: #555;
-    --color-text-light: #aaa;
-    --color-darkest: #A59D84;
-    --color-dark: #C1BAA1;
-    --color-default: #D7D3BF;
-    --color-light: #ECEBDE;
-}
+        :root {
+            --color-text: #555;
+            --color-darkest: #A59D84;
+            --color-dark: #C1BAA1;
+            --color-default: #D7D3BF;
+            --color-light: #ECEBDE;
+        }
 
-html {
-    font-family: "Roboto", sans-serif;
-    color: var(--color-text);
-    background: var(--color-darkest);
-    font-size: large;
-}
+        html {
+            font-family: "Roboto", sans-serif;
+            color: var(--color-text);
+            background: var(--color-darkest);
+        }
 
-body {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+	body {
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
-form {
-    display: flex;
-    justify-content: center;
-}
+        div {
+            margin: 1rem;
+        }
 
-input {
-    border-radius: 10px;
-    height: 2rem;
-    border: none;
-    color: var(--color-text);
-    margin-left: 0.5rem;
-    background: var(--color-default);
-    text-align: center;
-    width: 100%;
-    font-size: inherit;
-    height: 2.5em;
-}
+        form {
+            display: flex;
+            justify-content: center;
+        }
 
-#submit_button {
-    border-radius: 10px;
-    color: var(--color-text);
-    border: none;
-    background: var(--color-default);
-    align-items: center;
-    cursor: pointer;
-    padding-left: 2em;
-    padding-right: 2em;
-    width:80%;
-}
+        input {
+            margin: 0.5rem;
+            border-radius: 10px;
+            height: 2rem;
+            border: none;
+            color: var(--color-text);
+            margin-left: 0.5rem;
+            background: var(--color-default);
+            text-align: center;
+        }
 
-#submit_button:hover {
-    scale: 1.05;
-    background: var(--color-light);
-}
+        #submit_button {
+            border-radius: 10px;
+            color: var(--color-text);
+            border: none;
+            background: var(--color-default);
+            align-items: center;
+            cursor: pointer;
+        }
 
-#logo {
-    font-size: 2em;
-    margin: 1em;
-}
+        #submit_button:hover {
+            scale: 1.05;
+            background: var(--color-light);
+        }
 
-.container label {
-    color: var(--color-text-light);
-    position: relative;
-    top:25px;
-    left:20px;
-    font-size: small;
-    text-align: center;
-}
+        #logo {
+            font-size: 2em;
+            margin: 1em;
+        }
 
-.registrierung_card {
-    padding: 0 2em 0 2em;
-    display: flex;
-    flex-direction: column;
-    background: var(--color-light);
-    border-radius: 1rem;
-    border: 3px solid var(--color-dark)
-}
+	label {
+		text-align: center;
+	}
 
-.input-group {
-    width: 100%;
-    font-size: larger;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: stretch;
-
-}
-
-.container {
-    margin: 0.5rem;
-    width: 100%;
-}
+        div {
+            padding: 1em;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--color-light);
+            width:fit-content;
+            border-radius: 1rem;
+        }
