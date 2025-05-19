@@ -71,22 +71,6 @@
 
        
 
-        <script>
-            const datumInput = document.getElementById('datumInput');
-            const form = document.getElementById('datumForm');
-            const vorherBtn = document.getElementById('vorheriges');
-            const naechstesBtn = document.getElementById('naechstes');
-
-            function verschiebeDatum(tage) {
-                const aktuellesDatum = new Date(datumInput.value);
-                aktuellesDatum.setDate(aktuellesDatum.getDate() + tage);
-                datumInput.value = aktuellesDatum.toISOString().split('T')[0];
-                form.submit();
-            }
-
-            vorherBtn.addEventListener('click', () => verschiebeDatum(-1));
-            naechstesBtn.addEventListener('click', () => verschiebeDatum(1));
-        </script>
     </main>
 
     <aside>
@@ -107,4 +91,20 @@
     </footer>
 </body>
 
+        <script>
+            const datumInput = document.getElementById('datumInput');
+            const form = document.getElementById('datumForm');
+            const vorherBtn = document.getElementById('vorheriges');
+            const naechstesBtn = document.getElementById('naechstes');
+
+            function verschiebeDatum(tage) {
+                const aktuellesDatum = new Date(datumInput.value);
+                aktuellesDatum.setDate(aktuellesDatum.getDate() + tage);
+                datumInput.value = aktuellesDatum.toISOString().split('T')[0];
+                form.submit();
+            }
+
+            vorherBtn.addEventListener('click', () => verschiebeDatum(-1));
+            naechstesBtn.addEventListener('click', () => verschiebeDatum(1));
+        </script>
 </html>
