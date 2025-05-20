@@ -4,21 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $loginSeite; ?> Anmeldung</title>
+    <title>
+        <?php echo $loginSeite; ?> Anmeldung
+    </title>
     <link rel="stylesheet" type="text/css" href="../webseite/style/login.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
 </head>
 
 
 <body>
-    <form method="post">
-        <div class="login_card">
-                <label id="logo"><?php echo $loginSeite; ?> Anmeldung</label>
+    <div id="outer_border">
+        <form method="post">
+            <div class="login_card">
+                <h2 id="logo">
+                    <?php echo $loginSeite; ?> Anmeldung
+                </h2>
                 <input type="text" maxlength="35" name="benutzernameFormular" placeholder="Benutzername" id="bName">
                 <input type="password" name="passwortFormular" placeholder="Passwort" id="passwort">
                 <input type="submit" name="submit" value="Anmelden" id="submit_button">
-                <div style="font-size:11px; color:#cc0000; margin-top:10px"><?php echo isset($error) ? htmlspecialchars($error) : ''; ?></div>
-        </div>
-    </form>
+                <div style="font-size:11px; color:#cc0000; margin-top:10px">
+                    <?php echo isset($error) ? htmlspecialchars($error) : ''; ?>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

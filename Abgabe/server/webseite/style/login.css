@@ -1,76 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+    --color-light: #fff;
+    --color-dark: #27182e;
+    --color-shadow: #24004a;
+}
 
-        :root {
-            --color-text: #555;
-            --color-darkest: #A59D84;
-            --color-dark: #C1BAA1;
-            --color-default: #D7D3BF;
-            --color-light: #ECEBDE;
-        }
+html {
+    font-family: "Cantarell", sans-serif;
+    font-size: larger;
 
-        html {
-            font-family: "Roboto", sans-serif;
-            color: var(--color-text);
-            background: var(--color-darkest);
-        }
+}
 
-	body {
-		height: 100vh;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
 
-        div {
-            margin: 1rem;
-        }
 
-        form {
-            display: flex;
-            justify-content: center;
-        }
 
-        input {
-            margin: 0.5rem;
-            border-radius: 10px;
-            height: 2rem;
-            border: none;
-            color: var(--color-text);
-            margin-left: 0.5rem;
-            background: var(--color-default);
-            text-align: center;
-        }
+#outer_border {
+    position: relative;
+    top:5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+    border: 2px solid var(--color-dark);
+    border-radius: 15px;
+}
 
-        #submit_button {
-            border-radius: 10px;
-            color: var(--color-text);
-            border: none;
-            background: var(--color-default);
-            align-items: center;
-            cursor: pointer;
-        }
+form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        #submit_button:hover {
-            scale: 1.05;
-            background: var(--color-light);
-        }
+.login_card {
+    flex-grow: 0.2;
+    font-size: larger;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    border: 2px solid var(--color-dark);
+    border-radius: 15px;
+    box-shadow: 0 0 5px var(--color-shadow);
+}
 
-        #logo {
-            font-size: 2em;
-            margin: 1em;
-        }
+#logo {
+    font-weight: 100;
+}
 
-	label {
-		text-align: center;
-	}
+.login_card input {
+    background-color: var(--color-light);
+    height: 3em;
+    border: 2px solid var(--color-dark);
+    border-radius: 15px;
+    margin-top: 1em;
+}
 
-        div {
-            padding: 1em;
-            display: flex;
-            align-items: center;
-            flex-direction: column;
-            justify-content: center;
-            background: var(--color-light);
-            width:fit-content;
-            border-radius: 1rem;
-        }
+.login_card input::placeholder {
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+#submit_button {
+    padding: 0 2em 0 2em;
+}
+
+
+#submit_button:hover {
+    scale: 1.05;
+}
