@@ -65,6 +65,7 @@ form {
 .login_card input::placeholder {
     font-style: italic;
     font-size: 0.95em;
+    text-align: center;
 }
 
 #submit_button {
