@@ -60,6 +60,7 @@ form {
     border: 2px solid var(--color-dark);
     border-radius: 15px;
     margin-top: 1em;
+    text-align: center;
 }
 
 .login_card input::placeholder {
