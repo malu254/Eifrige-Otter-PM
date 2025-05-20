@@ -38,17 +38,21 @@
             <caption>Vorhandene Benutzer</caption>
             <tr>
                 <th>Benutzername</th>
-                <th>Passwort</th>
-                <th>E-Mail</th>
-                <th>Aufforderung neues Passwort</th>
+                <th>Status</th>
+                <th>Soll-Arbeitszeit</th>
+                <th>Stundenwoche</th>
+                <th>Fehlzeit</th>
+                <!--<th>Minderjährig</th> -->
                 <th>Entfernen</th>
             </tr>
             <?php foreach ($eintraege as $eintrag): ?>
                 <tr>
                     <td><?= htmlspecialchars($eintrag['benutzername']) ?></td>
-                    <td></td>
-                    <td><?= htmlspecialchars($eintrag['email']) ?></td>
-                    <td><input type="checkbox"></td>
+                    <td><?= htmlspecialchars($eintrag['status']) ?></td>
+                    <td><?= htmlspecialchars($eintrag['sollArbeitszeit']) ?></td>
+                    <td><?= htmlspecialchars($eintrag['stundenwoche']) ?></td>
+                    <td><?= htmlspecialchars($eintrag['fehlzeit']) ?></td>
+                    <!-- <td><?= htmlspecialchars($HEUTE - $eintrag['alter']) ?></td> -->
                     <td>
                         <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
                             <form method="post" onsubmit="return confirm('Benutzer wirklich löschen?');">
@@ -56,7 +60,7 @@
                                 <button type="submit">Entfernen</button>
                             </form>
                         <?php else: ?>
-                            eigener Account
+                            Admin Account
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -66,20 +70,24 @@
                     <td>
                         <input type="text" maxlength="35" name="benutzernameEingabe" placeholder="Benutzername" required>
                     </td>
+
+                    <td>
+                        <input type="password" maxlength="35" name="passwortEingabe" placeholder="Vorläufiges Passwort" required>
+                    </td>
                     
-                    <td>
-                        <input type="text" maxlength="35" name="passwordEingabe" placeholder="Passwort" required>
+                    <td> 
+                        Soll-Arbeitszeit:<select name="sollArbeitszeitEingabe">
+                            <option>30 Stunden</option>
+                            <option>35 Stunden</option>
+                            <option>40 Stunden</option>
+                        </select>
                     </td>
 
                     <td>
-                        <input type="text" maxlength="35" name="mailEingabe" placeholder="E-Mail" required>
-                    </td>
-                   
-                    <td>
-                        <input type="checkbox" name="aufforderungNeuPasswortCheck" required>
+                        Geburtstag: <input type="date" maxlength="35" name="gebEingabe" required>
                     </td>
 
-                    <td>
+                    <td colspan="2">
                         <button type="submit" name="benutzerHinzufuegen">Hinzufügen</button>
                     </td>
                 </form>

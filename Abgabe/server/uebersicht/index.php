@@ -29,6 +29,17 @@
             $stmt->execute();
             $stmt->close();
         }
+
+       if ($aktion == 'Kommen') {
+            $status = 'Anwesend';
+        } else {
+            $status = 'Abwesend';
+        }
+        $stmt = $conn->prepare("UPDATE user SET status = ? WHERE benutzername = ?");
+        $stmt->bind_param("ss", $status, $benutzername);
+        $stmt->execute();
+        $stmt->close();
+
     }
 
     // Einträge für Tabelle holen
