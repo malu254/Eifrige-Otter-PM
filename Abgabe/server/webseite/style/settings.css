@@ -1,7 +1,7 @@
 #einstellungen{
     position: absolute;
-    top: 25%;
-    left: 73%;
+    top: 22%;
+    left: 87%;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     border: solid black;
@@ -18,8 +18,8 @@
 
     #mitteilungen{
     position: absolute;
-    top: 25%;
-    left: 73%;
+    top: 22%;
+    left: 81%;
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);
     border: solid black;
