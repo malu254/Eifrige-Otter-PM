@@ -42,17 +42,17 @@
                 <th>Soll-Arbeitszeit</th>
                 <th>Stundenwoche</th>
                 <th>Fehlzeit</th>
-                <!--<th>Minderjährig</th> -->
+                <th>Minderjährig</th>
                 <th>Entfernen</th>
             </tr>
             <?php foreach ($eintraege as $eintrag): ?>
                 <tr>
-                    <td><?= htmlspecialchars($eintrag['benutzername']) ?></td>
-                    <td><?= htmlspecialchars($eintrag['status']) ?></td>
-                    <td><?= htmlspecialchars($eintrag['sollArbeitszeit']) ?></td>
-                    <td><?= htmlspecialchars($eintrag['stundenwoche']) ?></td>
-                    <td><?= htmlspecialchars($eintrag['fehlzeit']) ?></td>
-                    <!-- <td><?= htmlspecialchars($HEUTE - $eintrag['alter']) ?></td> -->
+                    <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['status'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['sollArbeitszeit'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['stundenwoche'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['fehlzeit'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['geburtstag'] ?? '-') ?></td>
                     <td>
                         <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
                             <form method="post" onsubmit="return confirm('Benutzer wirklich löschen?');">
@@ -87,7 +87,7 @@
                         Geburtstag: <input type="date" maxlength="35" name="gebEingabe" required>
                     </td>
 
-                    <td colspan="2">
+                    <td colspan="3">
                         <button type="submit" name="benutzerHinzufuegen">Hinzufügen</button>
                     </td>
                 </form>

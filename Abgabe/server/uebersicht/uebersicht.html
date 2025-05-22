@@ -28,7 +28,7 @@
 
     <nav class="navbar navbar-dark bg-dark border-bottom border-secondary">
       <div class="container-fluid d-flex align-items-center">
-        <a class="navbar-brand me-3" href="#">Willkommen, $Nutzer$</a>
+        <a class="navbar-brand me-3" href="#">Willkommen, <?php echo $_SESSION['login_user']; ?></a>
         <div class="flex-grow-1"></div>
         <a class="nav-link text-light me-3 fs-3" href="#" title="Benachrichtigungen">
           <i class="bi bi-bell"></i>
@@ -83,41 +83,69 @@
       <div class="w-50 h-100 bg-light d-flex flex-column p-3">
 
         <div class="d-flex justify-content-center align-items-center mb-3 mt-5">
-          <button type="button" class="btn btn-primary btn-sm me-2">Früher</button>
-          <input
-            type="date"
-            class="form-control form-control-sm text-white bg-primary border-primary rounded me-2"
-            style="width: auto; padding: .25rem .5rem;"
-          >
-          <button type="button" class="btn btn-primary btn-sm">Später</button>
+          
+        <form method="get" id="datumForm" class="d-flex align-items-center">
+          <button type="button" id="vorheriges" class="btn btn-primary btn-sm me-2">Früher</button>
+          
+          <input type="date" name="date" id="datumInput" value="<?= isset($_GET['date']) ? $_GET['date'] : date('Y-m-d') ?>" class="form-control form-control-sm text-white bg-primary border-primary rounded me-2" style="width: auto; padding: .25rem .5rem;">
+                    
+          <button type="button" id="naechstes" class="btn btn-primary btn-sm">Später</button>
+        </form>
+
         </div>
 
         <div class="overflow-auto flex-grow-1 mb-2">
           <table class="table table-light mb-0">
             <thead>
-              <tr><th>#</th><th>First</th><th>Last</th><th>Handle</th></tr>
+              <th>Datum</th><th>Aktion</th><th>Uhrzeit</th></tr>
             </thead>
             <tbody>
-              <tr><th>1</th><td>Mark</td><td>Otto</td><td>@mdo</td></tr>
-              <tr><th>2</th><td>Jacob</td><td>Thornton</td><td>@fat</td></tr>
-              <tr><th>3</th><td>John</td><td>Doe</td><td>@social</td></tr>
-              <tr><th>3</th><td>John</td><td>Doe</td><td>@social</td></tr>
-              <tr><th>3</th><td>John</td><td>Doe</td><td>@social</td></tr>
-              <tr><th>3</th><td>John</td><td>Doe</td><td>@social</td></tr>
-              <tr><th>3</th><td>John</td><td>Doe</td><td>@social</td></tr>
-              <tr><th>3</th><td>John</td><td>Doe</td><td>@social</td></tr>
+
+              <?php
+                $ausgewaehltesDatum = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
+
+                foreach ($eintraege as $eintrag): 
+                    $eintragsDatum = date("Y-m-d", strtotime($eintrag['zeitpunkt']));
+                    if ($eintragsDatum === $ausgewaehltesDatum):
+                        $datum = date("d.m.Y", strtotime($eintrag['zeitpunkt']));
+                        $uhrzeit = date("H:i", strtotime($eintrag['zeitpunkt']));
+                ?>
+                        <tr>
+                            <td><?= $datum ?></td>
+                            <td><?= $eintrag['aktion'] ?></td>
+                            <td><?= $uhrzeit ?></td>
+                        </tr>
+                <?php 
+                    endif;
+                endforeach;
+                ?>  
             </tbody>
           </table>
         </div>
 
+
+        <form id="kommen" method="post" style="display: none;">
+          <input id="kommen" type="hidden" name="aktion" value="Kommen">
+        </form>
+
+        <form id="gehen" method="post" style="display: none;">
+          <input id="gehem" type="hidden" name="aktion" value="Gehen">
+        </form>
+
+
+
         <div class="flex-grow-1 d-flex justify-content-center align-items-center">
           <div class="d-grid gap-2" style="width:200px;">
-            <button type="button" class="btn btn-primary btn-lg w-100">
+
+
+            <button  onclick="document.getElementById('kommen').submit();" type="button" class="btn btn-primary btn-lg w-100">
               <i class="bi bi-box-arrow-in-right me-2"></i>Kommen
             </button>
-            <button type="button" class="btn btn-primary btn-lg w-100">
+
+            <button onclick="document.getElementById('gehen').submit();" type="button" class="btn btn-primary btn-lg w-100">
               <i class="bi bi-box-arrow-right me-2"></i>Gehen
             </button>
+
             <button type="button" class="btn btn-primary btn-lg w-100">
               <i class="bi bi-clock-history me-2"></i>Urlaub/Reise
             </button>
@@ -127,14 +155,14 @@
       </div>
 
       <div class="w-50 h-100 bg-light d-flex flex-column p-3 text-dark">
-
+        <?php foreach ($eintraegeInfo as $eintragInfo): ?>
         <div class="mt-5 d-flex flex-column gap-3 fs-5">
-          <p class="mb-0"><strong>Soll-Arbeitszeit:</strong></p>
-          <p class="mb-0"><strong>Stundenwoche:</strong></p>
+          <p class="mb-0"><strong>Soll-Arbeitszeit: <?= htmlspecialchars($eintragInfo['sollArbeitszeit'] / 5 ?? '-') ?> Stunden am Tag</strong></p>
+          <p class="mb-0"><strong>Stundenwoche: <?= htmlspecialchars($eintragInfo['sollArbeitszeit'] ?? '-') ?></strong></p>
           <p class="mb-0"><strong>Gearbeitete Stunden / Woche:</strong></p>
-          <p class="mb-0"><strong>Gleitzeitkonto:</strong></p>
+          <p class="mb-0"><strong>Gleitzeitkonto: <?= htmlspecialchars($eintragInfo['konto'] ?? '-') ?></strong></p>
         </div>
-
+        <?php endforeach; ?>
       </div>
 
     </main>
@@ -146,4 +174,28 @@
     crossorigin="anonymous"
   ></script>
 </body>
+
+<script>
+            // Tag shiften (vor zurück)
+            const datumInput = document.getElementById('datumInput');
+            const form = document.getElementById('datumForm');
+            const vorherBtn = document.getElementById('vorheriges');
+            const naechstesBtn = document.getElementById('naechstes');
+
+            function verschiebeDatum(tage) {
+                const aktuellesDatum = new Date(datumInput.value);
+                aktuellesDatum.setDate(aktuellesDatum.getDate() + tage);
+                datumInput.value = aktuellesDatum.toISOString().split('T')[0];
+                form.submit();
+            }
+
+            vorherBtn.addEventListener('click', () => verschiebeDatum(-1));
+            naechstesBtn.addEventListener('click', () => verschiebeDatum(1));
+
+            // Laden von den input Datums Feld
+            document.getElementById('datumInput').addEventListener('change', function() {
+                document.getElementById('datumForm').submit();
+            });
+        </script>
+
 </html>

@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
     session_start();
 
@@ -64,6 +66,7 @@
             $passwort = $_POST['passwortEingabe'];
             $geburtstag = $_POST['gebEingabe'];
             $sollArbeitszeit = $_POST['sollArbeitszeitEingabe'];
+            
 
             if (!empty($benutzer)) { // hier auf $benutzer prüfen
                 // Optional: prüfen, ob Benutzer bereits existiert
@@ -76,8 +79,8 @@
                     $stmt->close();
 
                     // Benutzer einfügen
-                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit) VALUES (?, ?, ?, ?)");
-                    $stmt->bind_param("ssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit);
+                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, geburtstag) VALUES (?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $geburtstag);
                     $stmt->execute();
                     $stmt->close();
                 } else {
@@ -91,7 +94,7 @@
 
     // Einträge für Tabelle holen
     $eintraege = [];
-    $stmt = $conn->prepare("SELECT benutzername, status,sollArbeitszeit, fehlzeit FROM user");
+    $stmt = $conn->prepare("SELECT benutzername, status,sollArbeitszeit, fehlzeit, geburtstag FROM user");
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {

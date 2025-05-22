@@ -42,7 +42,7 @@
 
     }
 
-    // Einträge für Tabelle holen
+    // Einträge für Zeitmanagement Tabelle holen
     $eintraege = [];
     $stmt = $conn->prepare("SELECT zeitpunkt, aktion FROM zeiterfassung WHERE benutzer_id = ? ORDER BY zeitpunkt DESC");
     $stmt->bind_param("i", $benutzer_id);
@@ -52,7 +52,19 @@
         $eintraege[] = $row;
     }
     $stmt->close();
+
+    // Zweite Abfrage (Info)
+    $eintraegeInfo = [];
+    $stmt = $conn->prepare("SELECT sollArbeitszeit, status, fehlzeit, konto FROM user WHERE benutzername = ?");
+    $stmt->bind_param("s", $benutzername);  // Richtig binden!
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $eintraegeInfo[] = $row;
+    }
+    $stmt->close();
     $conn->close();
+
 
     include 'uebersicht.html';
 ?>
