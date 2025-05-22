@@ -79,8 +79,8 @@ error_reporting(E_ALL);
                     $stmt->close();
 
                     // Benutzer einfügen
-                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, geburtstag) VALUES (?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $geburtstag);
+                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit) VALUES (?, ?, ?, ?)");
+                    $stmt->bind_param("ssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit);
                     $stmt->execute();
                     $stmt->close();
                 } else {
