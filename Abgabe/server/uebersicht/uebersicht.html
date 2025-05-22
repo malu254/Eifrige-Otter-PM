@@ -33,9 +33,16 @@
         <a class="nav-link text-light me-3 fs-3" href="#" title="Benachrichtigungen">
           <i class="bi bi-bell"></i>
         </a>
-        <a class="nav-link text-light me-3 fs-3" href="#" title="Ausloggen">
+
+        <form id="logoutForm" action="../login/logout.php" method="post" style="display: none;">
+          <input type="hidden" name="delete-button" value="1">
+        </form>
+
+        <a href="#" onclick="document.getElementById('logoutForm').submit();" class="nav-link text-light me-3 fs-3" title="Ausloggen">
           <i class="bi bi-box-arrow-right"></i>
         </a>
+
+
         <button class="navbar-toggler" type="button"
                 data-bs-toggle="offcanvas"
                 data-bs-target="#offcanvasDarkNavbar"
@@ -52,7 +59,7 @@
           </div>
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              <li class="nav-item"><a class="nav-link" href="#">Ausloggen</a></li>
+              <li class="nav-item"><a onclick="document.getElementById('logoutForm').submit();" class="nav-link" href="#">Ausloggen</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Passwort ändern</a></li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#"
