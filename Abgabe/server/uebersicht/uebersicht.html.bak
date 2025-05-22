@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+    <link rel="stylesheet" type="text/css" href="../webseite/style/zeiterfassung.css" />
+    <link rel="stylesheet" type="text/css" href="../webseite/style/settings.css" />
+    <link rel="icon" href="../webseite/doc/zeiterfassung.png">
+    <title>Zeiterfassung</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <!-- Logout Button -->
+            <form action="../login/logout.php" method="post">
+                <button class="abmeldeButton" type="submit" name="delete-button">
+                    <img class="logoutBild" src="../webseite/doc/abmelden.png" alt="Abmelden">
+                </button>
+            </form>                   
+        </div>
+    </div>
+
+
+    <img onclick="einstellungen()" src="../webseite/doc/settings.png" height="45px" id="einstellungenButton">
+
+    <div id="einstellungen" style="display: none;">
+        <div style="position: absolute;">
+            <p>Sprache</p>
+            <div style="position: absolute; left: 10px; top: 120%;">
+                <p style="position: absolute; left: 40px;">DE</p>
+                <div style="position: absolute; left: 155px; top: 23%;">
+                <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"></span>
+                </label>
+                </div>
+                <p style="position: absolute; left: 300px;">EN</p>
+            </div>
+        
+            </label>
+        </div>
+
+        <div style="position: absolute; top:50%;">
+            <p>Passwort Rücksetzung</p><br>
+            <input style="position: absolute; left: 10%; border-radius: 7px; height: 20px;" type="password" placeholder="Neues Passwort">
+            <button style="position: absolute; left: 160%;">Ok</button>
+        </div>
+    </div>
+
+
+    <img onclick="mitteilungen()" src="../webseite/doc/notify.png" height="45px" id="mitteilungenButton">
+
+    <div id="mitteilungen" style="display: none;">
+        <div style="position: absolute;">
+            nachrichten
+        </div>
+    </div>
+
+    <script>
+        function einstellungen() {
+        var x = document.getElementById("einstellungen");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+        }
+
+        function mitteilungen() {
+        var x = document.getElementById("mitteilungen");
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+        }
+    </script>
+
+
+    <header>
+        <h2>Hallo, <?php echo $_SESSION['login_user']; ?></h2>
+    </header>
+
+
+    <main>
+        <section id="tabelle">
+            <form method="get" id="datumForm">
+                <button type="button" id="vorheriges">früher</button>
+                <input type="date" name="date" id="datumInput" value="<?= isset($_GET['date']) ? $_GET['date'] : date('Y-m-d') ?>">
+                <button type="button" id="naechstes">später</button>
+            </form>
+
+            <table border="">
+                <tr>
+                    <th>Datum</th>
+                    <th>Kommen/Gehen</th>
+                    <th>Uhrzeit</th>
+                </tr>
+                <?php
+                $ausgewaehltesDatum = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
+
+                foreach ($eintraege as $eintrag): 
+                    $eintragsDatum = date("Y-m-d", strtotime($eintrag['zeitpunkt']));
+                    if ($eintragsDatum === $ausgewaehltesDatum):
+                        $datum = date("d.m.Y", strtotime($eintrag['zeitpunkt']));
+                        $uhrzeit = date("H:i", strtotime($eintrag['zeitpunkt']));
+                ?>
+                        <tr>
+                            <td><?= $datum ?></td>
+                            <td><?= $eintrag['aktion'] ?></td>
+                            <td><?= $uhrzeit ?></td>
+                        </tr>
+                <?php 
+                    endif;
+                endforeach;
+                ?>
+            </table>
+
+             <form method="post">
+                    <button type="submit" name="aktion" value="Kommen">Kommen</button>
+                    <button type="submit" name="aktion" value="Gehen">Gehen</button>
+            </form>
+        </section>
+
+       
+
+    </main>
+
+    <aside>
+        <section id="daten">
+            <dl>
+                <dt>ID</dt>
+                <dd>32450896798023576</dd>
+                <dt>Modell</dt>
+                <dd><?= $stundenwoche ?></dd>
+                <dd><?= $zeitkonto ?></dd>
+
+            </dl>
+        </section>
+    </aside>
+
+    <footer>
+        <p>footer</p>
+    </footer>
+</body>
+        <script>
+            const datumInput = document.getElementById('datumInput');
+            const form = document.getElementById('datumForm');
+            const vorherBtn = document.getElementById('vorheriges');
+            const naechstesBtn = document.getElementById('naechstes');
+
+            function verschiebeDatum(tage) {
+                const aktuellesDatum = new Date(datumInput.value);
+                aktuellesDatum.setDate(aktuellesDatum.getDate() + tage);
+                datumInput.value = aktuellesDatum.toISOString().split('T')[0];
+                form.submit();
+            }
+
+            vorherBtn.addEventListener('click', () => verschiebeDatum(-1));
+            naechstesBtn.addEventListener('click', () => verschiebeDatum(1));
+        </script>
+</html>
