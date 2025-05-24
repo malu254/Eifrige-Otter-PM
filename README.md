@@ -5,13 +5,23 @@
 ## Software für Erfassung von Arbeitszeiten in Projektmanagement  
 
 ---
+### Wichtige Links
+
+[User Seite](https://zeitbuchung.it-lutz.com/)
+
+[Admin Portal](https://zeitbuchung.it-lutz.com/Admin)
 
 [Projektportfolio PDF](Abgabe/Dokumentation/Projektportfolio.pdf)
 
-[Vorgabe PDF](Vorgabe/Portfolio - Projektmanagement Stuttgart.pdf)
+[Vorgabe PDF](Vorgabe/Portfolio%20-%20Projektmanagement%20Stuttgart.pdf)
 
 **DHBW Moodle Kurs:**  
 ➡️ [Projektmanagement auf Moodle](https://elearning.dhbw-stuttgart.de/moodle/course/view.php?id=21296)
+
+### Wichtige Zugangsdaten
+Test/test
+
+Admin/admin
 
 ---
 
