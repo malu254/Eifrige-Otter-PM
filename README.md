@@ -9,7 +9,7 @@
 
 [User Seite](https://zeitbuchung.it-lutz.com/)
 
-[Admin Portal](https://zeitbuchung.it-lutz.com/Admin)
+[Admin Portal](https://zeitbuchung.it-lutz.com/leitung)
 
 [Projektportfolio PDF](Abgabe/Dokumentation/Projektportfolio.pdf)
 
@@ -21,7 +21,7 @@
 ### Wichtige Zugangsdaten
 Test/test
 
-Admin/admin
+admin/admin
 
 ---
 
