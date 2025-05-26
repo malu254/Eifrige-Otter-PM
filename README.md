@@ -15,6 +15,8 @@
 
 [Vorgabe PDF](Vorgabe/Portfolio%20-%20Projektmanagement%20Stuttgart.pdf)
 
+[Product Backlog](https://eifrige-otter-pm.atlassian.net/jira/software/projects/ECS/boards/1)
+
 **DHBW Moodle Kurs:**  
 ➡️ [Projektmanagement auf Moodle](https://elearning.dhbw-stuttgart.de/moodle/course/view.php?id=21296)
 
@@ -28,23 +30,6 @@ admin/admin
 ## ✅ Checkliste: Anforderungen
 Prio 1
 
-- [ ] Individuelle Passwortvergabe beim ersten Start  
-- [ ] Warnung bei drohender Verletzung des Arbeitszeitgesetzes  
-- [ ] Anbindung an Zeiterfassungsterminals im Büro  
-- [ ] Einhaltung des Zeitrahmens von 6–22 Uhr  
-- [ ] Besondere Berücksichtigung minderjähriger Mitarbeiter  
-
-
-Prio 2
-
-- [ ] Einhaltung des deutschen Arbeitszeitgesetzes (ArbZG)  
-- [ ] Definition eines Vorgehensmodells mit Meilensteinen  
-- [ ] Ausgearbeiteter Zeitplan  
-- [ ] Detaillierte Budgetkalkulation  
-
-
-Prio 3
-
 - [ ] Vollständiges Pflichtenheft/Product Backlog  
 - [ ] Projektcontrolling zur Fortschrittsüberwachung  
 - [ ] Qualitätssicherungskonzept  
@@ -56,6 +41,23 @@ Prio 3
 - [ ] Fertig entwickelte Softwarelösung  
 - [ ] Kritische Reflexion & Lessons Learned  
 - [ ] Abgabe des vollständigen Projektportfolios  
+
+
+Prio 2
+
+- [ ] Individuelle Passwortvergabe beim ersten Start  
+- [ ] Warnung bei drohender Verletzung des Arbeitszeitgesetzes  
+- [ ] Anbindung an Zeiterfassungsterminals im Büro  
+- [ ] Einhaltung des Zeitrahmens von 6–22 Uhr  
+- [ ] Besondere Berücksichtigung minderjähriger Mitarbeiter  
+
+
+Prio 3
+
+- [ ] Einhaltung des deutschen Arbeitszeitgesetzes (ArbZG)  
+- [ ] Definition eines Vorgehensmodells mit Meilensteinen  
+- [ ] Ausgearbeiteter Zeitplan  
+- [ ] Detaillierte Budgetkalkulation  
 
 
 Erledigt
