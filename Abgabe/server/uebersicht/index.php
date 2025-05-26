@@ -67,6 +67,21 @@ error_reporting(E_ALL);
         $stmt->execute();
         $stmt->close();
     }
+
+    // Nachrichten
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['get-notification'])) {
+
+        $nachrichten = [];
+        $stmt = $conn->prepare("SELECT * FROM notification WHERE benutzer_id = ?");
+        $stmt->bind_param("i", $benutzer_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            $nachrichten[] = $row;
+        }
+        $stmt->close();
+        echo json_encode($nachrichten);
+    }
     
     // Einträge für Zeitmanagement Tabelle holen
     $eintraege = [];
