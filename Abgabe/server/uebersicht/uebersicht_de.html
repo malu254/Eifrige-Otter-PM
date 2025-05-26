@@ -15,6 +15,17 @@
       height: 100%;
       margin: 0;
     }
+
+    .unstyle-button {
+      all: unset;
+      /* Setzt fast alle Styles zurück */
+      cursor: pointer;
+      /* Damit die Maus zeigt, dass es klickbar ist */
+      font: inherit;
+      /* Erbt Schriftart vom Elternelement */
+      color: inherit;
+      /* Erbt Farbe */
+    }
   </style>
 </head>
 
@@ -29,7 +40,33 @@
         </a>
         <div class="flex-grow-1"></div>
         <a class="nav-link text-light me-3 fs-3" href="#" title="Benachrichtigungen">
-          <i class="bi bi-bell"></i>
+
+
+          <!-- Button trigger modal -->
+          <button type="button" class="unstyle-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <i class="bi bi-bell"></i>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="notification-body">
+                  ...
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </a>
 
         <form id="logoutForm" action="../login/logout.php" method="post" style="display: none;">
@@ -201,6 +238,9 @@
         <?php endforeach; ?>
       </div>
 
+
+
+
     </main>
   </div>
 
@@ -216,6 +256,22 @@
   const vorherBtn = document.getElementById('vorheriges');
   const naechstesBtn = document.getElementById('naechstes');
   const language_check = document.getElementById("language_switch")
+  const notification_body = document.getElementById("notification-body")
+
+  function check_for_notifications() {
+    fetch("index.php", {
+      method: 'POST',
+      body: "get-notification"
+    })
+      .then(response => {
+        if (!response.ok) throw new Error('Netzwerkfehler');
+        return response.json();
+      })
+      .then(data => {
+        console.log('Erhaltene Daten:', data);
+        // Hier kannst du die Daten in der UI anzeigen
+      })
+  }
 
   function verschiebeDatum(tage) {
     const aktuellesDatum = new Date(datumInput.value);
@@ -233,7 +289,7 @@
     document.getElementById('datumForm').submit();
   });
 
-  language_check.addEventListener("change", ()=> {
+  language_check.addEventListener("change", () => {
     if (language_check.checked) {
       window.location.href = "./uebersicht_en.html";
     }
