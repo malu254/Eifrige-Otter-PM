@@ -60,7 +60,19 @@
           <div class="offcanvas-body">
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li class="nav-item"><a onclick="document.getElementById('logoutForm').submit();" class="nav-link" href="#">Ausloggen</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Passwort ändern</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#"
+                   role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
+                  Passwort ändern
+                </a>
+                <ul class="dropdown-menu dropdown-menu-light">
+                  <form id="newPassword" method="post">
+                    <input type="password" name="passwortFormular" class="dropdown-item" placeholder="Neues Passwort"><input type="submit" name="submit" value="Ok" id="submit_button">
+                  </form>
+                </ul>
+              </li>
+
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#"
                    role="button" data-bs-toggle="dropdown"
@@ -68,10 +80,12 @@
                   Sprache ändern
                 </a>
                 <ul class="dropdown-menu dropdown-menu-light">
-                  <li><a class="dropdown-item" href="#">Deutsch</a></li>
-                  <li><a class="dropdown-item" href="#">Englisch</a></li>
+                  <!-- Sprachwechsel-Links -->
+                  <li><a onclick="document.getElementById('de').submit();" class="dropdown-item">Deutsch</a></li>
+                  <li><a onclick="document.getElementById('en').submit();" class="dropdown-item">English</a></li>
                 </ul>
               </li>
+
             </ul>
           </div>
         </div>
@@ -129,8 +143,17 @@
         </form>
 
         <form id="gehen" method="post" style="display: none;">
-          <input id="gehem" type="hidden" name="aktion" value="Gehen">
+          <input id="gehen" type="hidden" name="aktion" value="Gehen">
         </form>
+
+        <form id="en" method="post" style="display: none;">
+          <input id="en" type="hidden" name="sprache" value="en">
+        </form>
+
+        <form id="de" method="post" style="display: none;">
+          <input id="de" type="hidden" name="sprache" value="de">
+        </form>
+
 
 
 

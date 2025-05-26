@@ -57,5 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 
-include 'login.html';
+if ($_SESSION['lang'] === 'en') 
+{
+    include 'login_en.html';
+} 
+else 
+{
+    include 'login_de.html';
+}
 ?>

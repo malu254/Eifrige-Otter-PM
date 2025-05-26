@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
     session_start();
 
     if (!isset($_SESSION['login_user'])) {
@@ -7,6 +11,11 @@
         $seite = "Zeiterfassung";
         header("Location: ../login/login?data=$wert&site=$seite");
         exit();
+    }
+
+    if (isset($_GET['lang'])) 
+    {
+        $_SESSION['lang'] = $_GET['lang'];
     }
 
     include("/home/admin/datenbank_verbindung.php");
@@ -30,7 +39,7 @@
             $stmt->close();
         }
 
-       if ($aktion == 'Kommen') {
+        if ($aktion == 'Kommen') {
             $status = 'Anwesend';
         } else {
             $status = 'Abwesend';
@@ -39,9 +48,26 @@
         $stmt->bind_param("ss", $status, $benutzername);
         $stmt->execute();
         $stmt->close();
-
     }
 
+    // Sprache
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sprache'])) {
+        $_SESSION['lang'] = $_POST['sprache'];
+
+        $stmt = $conn->prepare("UPDATE user SET lang = ? WHERE benutzername = ?");
+        $stmt->bind_param("ss", $_SESSION['lang'], $benutzername);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['passwortFormular'])) {
+        $passwort = $_POST['passwortFormular'];
+        $stmt = $conn->prepare("UPDATE user SET passwort = ? WHERE benutzername = ?");
+        $stmt->bind_param("ss", $passwort, $benutzername);
+        $stmt->execute();
+        $stmt->close();
+    }
+    
     // Einträge für Zeitmanagement Tabelle holen
     $eintraege = [];
     $stmt = $conn->prepare("SELECT zeitpunkt, aktion FROM zeiterfassung WHERE benutzer_id = ? ORDER BY zeitpunkt DESC");
@@ -63,8 +89,27 @@
         $eintraegeInfo[] = $row;
     }
     $stmt->close();
+
+    // Sprache aus Datenbank laden
+    $stmt = $conn->prepare("SELECT lang FROM user WHERE benutzername = ?");
+    $stmt->bind_param("s", $benutzername);
+    $stmt->execute();
+    $stmt->bind_result($lang);
+    $stmt->fetch();
+    $_SESSION['lang'] = $lang;
+    $stmt->close();
     $conn->close();
 
 
-    include 'uebersicht.html';
+
+    // Standardt
+
+    if ($_SESSION['lang'] === 'en') 
+    {
+        include 'uebersicht_en.html';
+    } 
+    else 
+    {
+        include 'uebersicht_de.html';
+    }
 ?>
