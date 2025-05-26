@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
+    <link rel="stylesheet" type="text/css" href="../webseite/style/zeiterfassung.css" />
+    <link rel="icon" href="../webseite/doc/zeiterfassung.png">
+    <title>Leitung</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main">
+            <!-- Logout Button -->
+            <form action="../login/logout.php" method="post">
+                <button class="abmeldeButton" type="submit" name="delete-button">
+                    <img class="logoutBild" src="../webseite/doc/abmelden.png" alt="Abmelden">
+                </button>
+            </form>                   
+        </div>
+    </div>
+
+<!--
+    #TODO:
+        - Bei Logout Verweis auf Login Seite (ursprünglich)
+    -->
+
+    <header>
+        <h2>Hallo, <?php echo $_SESSION['login_user']; ?></h2>
+    </header>
+
+
+    <main>
+        <section id="tabelle">
+        <table border="">
+            <caption>Vorhandene Benutzer</caption>
+            <tr>
+                <th>Benutzername</th>
+                <th>Status</th>
+                <th>Soll-Arbeitszeit</th>
+                <th>Stundenwoche</th>
+                <th>Fehlzeit</th>
+                <th>Minderjährig</th>
+                <th>Entfernen</th>
+            </tr>
+            <?php foreach ($eintraege as $eintrag): ?>
+                <tr>
+                    <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['status'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['sollArbeitszeit'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['stundenwoche'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['fehlzeit'] ?? '-') ?></td>
+                    <td><?= htmlspecialchars($eintrag['geburtstag'] ?? '-') ?></td>
+                    <td>
+                        <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
+                            <form method="post" onsubmit="return confirm('Benutzer wirklich löschen?');">
+                                <input type="hidden" name="benutzername_loeschen" value="<?= htmlspecialchars($eintrag['benutzername']) ?>">
+                                <button type="submit">Entfernen</button>
+                            </form>
+                        <?php else: ?>
+                            Admin Account
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            <tr>
+                <form method="post" onsubmit="return confirm('Benutzer wirklich hinzufügen?');">
+                    <td>
+                        <input type="text" maxlength="35" name="benutzernameEingabe" placeholder="Benutzername" required>
+                    </td>
+
+                    <td>
+                        <input type="password" maxlength="35" name="passwortEingabe" placeholder="Vorläufiges Passwort" required>
+                    </td>
+                    
+                    <td> 
+                        Soll-Arbeitszeit:<select name="sollArbeitszeitEingabe">
+                            <option value="30">30 Stunden</option>
+                            <option value="35">35 Stunden</option>
+                            <option value="40">40 Stunden</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        Geburtstag: <input type="date" maxlength="35" name="gebEingabe" required>
+                    </td>
+
+                    <td colspan="3">
+                        <button type="submit" name="benutzerHinzufuegen">Hinzufügen</button>
+                    </td>
+                </form>
+            </tr>
+
+        </table>
+
+        </section>
+        
+        </section>
+    </main>
+    <footer>
+        <p>footer</p>
+    </footer>
+</body>
+
+</html>

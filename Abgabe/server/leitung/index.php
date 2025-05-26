@@ -66,6 +66,7 @@ error_reporting(E_ALL);
             $passwort = $_POST['passwortEingabe'];
             $geburtstag = $_POST['gebEingabe'];
             $sollArbeitszeit = $_POST['sollArbeitszeitEingabe'];
+            $sprache = $_POST['language'];
             
 
             if (!empty($benutzer)) { // hier auf $benutzer prüfen
@@ -79,8 +80,8 @@ error_reporting(E_ALL);
                     $stmt->close();
 
                     // Benutzer einfügen
-                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit) VALUES (?, ?, ?, ?)");
-                    $stmt->bind_param("ssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit);
+                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, lang) VALUES (?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $sprache);
                     $stmt->execute();
                     $stmt->close();
                 } else {
@@ -92,16 +93,47 @@ error_reporting(E_ALL);
 
     }
 
+    // Sprache
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sprache'])) {
+        $_SESSION['lang'] = $_POST['sprache'];
+
+        $stmt = $conn->prepare("UPDATE user SET lang = ? WHERE benutzername = ?");
+        $stmt->bind_param("ss", $_SESSION['lang'], $benutzername);
+        $stmt->execute();
+        $stmt->close();
+    }
+
     // Einträge für Tabelle holen
     $eintraege = [];
-    $stmt = $conn->prepare("SELECT benutzername, status,sollArbeitszeit, fehlzeit, geburtstag FROM user");
+    $stmt = $conn->prepare("SELECT benutzername, status,sollArbeitszeit, fehlzeit, geburtstag, lang FROM user");
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         $eintraege[] = $row;
     }
     $stmt->close();
+
+
+    // Sprache aus Datenbank laden
+    $stmt = $conn->prepare("SELECT lang FROM user WHERE benutzername = ?");
+    $stmt->bind_param("s", $benutzername);
+    $stmt->execute();
+    $stmt->bind_result($lang);
+    $stmt->fetch();
+    $_SESSION['lang'] = $lang;
+    $stmt->close();
     $conn->close();
 
-    include 'leitung.html';
+
+
+    // Standardt
+
+    if ($_SESSION['lang'] === 'en') 
+    {
+        include 'leitung_en.html';
+    } 
+    else 
+    {
+        include 'leitung_de.html';
+    }
 ?>

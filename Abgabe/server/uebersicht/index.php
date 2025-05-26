@@ -70,6 +70,7 @@ error_reporting(E_ALL);
 
     // Nachrichten
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['get-notification'])) {
+        header('Content-Type: application/json');
 
         $nachrichten = [];
         $stmt = $conn->prepare("SELECT * FROM notification WHERE benutzer_id = ?");
@@ -81,6 +82,7 @@ error_reporting(E_ALL);
         }
         $stmt->close();
         echo json_encode($nachrichten);
+        exit;
     }
     
     // Einträge für Zeitmanagement Tabelle holen
