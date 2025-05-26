@@ -29,8 +29,6 @@ admin/admin
 Prio 1
 
 - [ ] Individuelle Passwortvergabe beim ersten Start  
-- [ ] Möglichkeit zur Passwortänderung im Einstellungsmenü  
-- [ ] Sprachumschaltung (Deutsch/Englisch)  
 - [ ] Warnung bei drohender Verletzung des Arbeitszeitgesetzes  
 - [ ] Anbindung an Zeiterfassungsterminals im Büro  
 - [ ] Einhaltung des Zeitrahmens von 6–22 Uhr  
@@ -62,6 +60,8 @@ Prio 3
 
 Erledigt
 
+- [x] Möglichkeit zur Passwortänderung im Einstellungsmenü  
+- [x] Sprachumschaltung (Deutsch/Englisch)  
 - [x] Plattformunabhängigkeit (Windows, Mac, Linux, Mobile via Web)  
 - [x] Manuelle Zeiterfassung im Homeoffice  
 - [x] Unterstützung verschiedener Arbeitszeitmodelle (30/35/40h)  
