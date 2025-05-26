@@ -43,7 +43,7 @@
 
 
           <!-- Button trigger modal -->
-          <button type="button" class="unstyle-button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button type="button" class="unstyle-button" data-bs-toggle="modal" data-bs-target="#exampleModal" id="notification-btn">
             <i class="bi bi-bell"></i>
           </button>
 
@@ -256,9 +256,10 @@
   const vorherBtn = document.getElementById('vorheriges');
   const naechstesBtn = document.getElementById('naechstes');
   const language_check = document.getElementById("language_switch")
-  const notification_body = document.getElementById("notification-body")
+  const notificationBtn = document.getElementById("notification-btn")
 
-  function check_for_notifications() {
+  function check_for_notifications(event) {
+    const notification_body = document.getElementById("notification-body")
     fetch("index.php", {
       method: 'POST',
       body: "get-notification"
@@ -272,6 +273,11 @@
         // Hier kannst du die Daten in der UI anzeigen
       })
   }
+
+  notificationBtn.addEventListener("click",check_for_notifications)
+
+
+
 
   function verschiebeDatum(tage) {
     const aktuellesDatum = new Date(datumInput.value);
