@@ -12,6 +12,7 @@ error_reporting(E_ALL);
         exit();
     }
 
+    $texts = include __DIR__ . "/../webseite/language/{$_SESSION['lang']}.php";
     include("/home/admin/datenbank_verbindung.php");
 
     // Benutzer-ID anhand von Benutzername holen
@@ -126,14 +127,6 @@ error_reporting(E_ALL);
 
 
 
-    // Standardt
-
-    if ($_SESSION['lang'] === 'en') 
-    {
-        include 'leitung_en.html';
-    } 
-    else 
-    {
-        include 'leitung_de.html';
-    }
+    include '../webseite/navbar/navbar.html';
+    include 'leitung.html';
 ?>

@@ -1,107 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> 
-    <link rel="stylesheet" type="text/css" href="../webseite/style/zeiterfassung.css" />
-    <link rel="icon" href="../webseite/doc/zeiterfassung.png">
-    <title>Leitung</title>
-</head>
-
-<body>
-    <div class="container">
-        <div class="main">
-            <!-- Logout Button -->
-            <form action="../login/logout.php" method="post">
-                <button class="abmeldeButton" type="submit" name="delete-button">
-                    <img class="logoutBild" src="../webseite/doc/abmelden.png" alt="Abmelden">
-                </button>
-            </form>                   
-        </div>
-    </div>
-
-<!--
-    #TODO:
-        - Bei Logout Verweis auf Login Seite (ursprünglich)
-    -->
-
-    <header>
-        <h2>Hallo, <?php echo $_SESSION['login_user']; ?></h2>
-    </header>
-
-
-    <main>
-        <section id="tabelle">
-        <table border="">
-            <caption>Vorhandene Benutzer</caption>
+    <main class="d-flex flex-grow-1 gap-4">
+    <div class="col-12 bg-light d-flex flex-column p-3">
+      <div class="table-responsive overflow-auto flex-grow-1 mb-2">
+        <table class="table table-light table-bordered mb-0">
+          <thead class="table-light">
             <tr>
-                <th>Benutzername</th>
-                <th>Status</th>
-                <th>Soll-Arbeitszeit</th>
-                <th>Stundenwoche</th>
-                <th>Fehlzeit</th>
-                <th>Minderjährig</th>
-                <th>Entfernen</th>
+              <th><?= $texts['username']?></th>
+              <th><?= $texts['status']?></th>
+              <th><?= $texts['working_time_target']?></th>
+              <th><?= $texts['weekly_hours']?></th>
+              <th><?= $texts['absence']?></th>
+              <th><?= $texts['language']?></th>
+              <th><?= $texts['underage']?></th>
+              <th><?= $texts['remove']?></th>
             </tr>
+          </thead>
+          <tbody>
             <?php foreach ($eintraege as $eintrag): ?>
-                <tr>
-                    <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($eintrag['status'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($eintrag['sollArbeitszeit'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($eintrag['stundenwoche'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($eintrag['fehlzeit'] ?? '-') ?></td>
-                    <td><?= htmlspecialchars($eintrag['geburtstag'] ?? '-') ?></td>
-                    <td>
-                        <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
-                            <form method="post" onsubmit="return confirm('Benutzer wirklich löschen?');">
-                                <input type="hidden" name="benutzername_loeschen" value="<?= htmlspecialchars($eintrag['benutzername']) ?>">
-                                <button type="submit">Entfernen</button>
-                            </form>
-                        <?php else: ?>
-                            Admin Account
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
             <tr>
-                <form method="post" onsubmit="return confirm('Benutzer wirklich hinzufügen?');">
-                    <td>
-                        <input type="text" maxlength="35" name="benutzernameEingabe" placeholder="Benutzername" required>
-                    </td>
-
-                    <td>
-                        <input type="password" maxlength="35" name="passwortEingabe" placeholder="Vorläufiges Passwort" required>
-                    </td>
-                    
-                    <td> 
-                        Soll-Arbeitszeit:<select name="sollArbeitszeitEingabe">
-                            <option value="30">30 Stunden</option>
-                            <option value="35">35 Stunden</option>
-                            <option value="40">40 Stunden</option>
-                        </select>
-                    </td>
-
-                    <td>
-                        Geburtstag: <input type="date" maxlength="35" name="gebEingabe" required>
-                    </td>
-
-                    <td colspan="3">
-                        <button type="submit" name="benutzerHinzufuegen">Hinzufügen</button>
-                    </td>
+              <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
+              <td><?= htmlspecialchars($texts[$eintrag['status']] ?? '-') ?></td>
+              <td><?= htmlspecialchars(($eintrag['sollArbeitszeit'] ?? null) !== null ? $eintrag['sollArbeitszeit'] . ($texts['hours'] ?? '') : '-') ?></td>
+              <td><?= htmlspecialchars($eintrag['stundenwoche'] ?? '-') ?></td>
+              <td><?= htmlspecialchars($eintrag['fehlzeit'] ?? '-') ?></td>
+              <td><?= htmlspecialchars($eintrag['lang'] ?? '-') ?></td>
+              <td><?= htmlspecialchars($eintrag['geburtstag'] ?? '-') ?></td>
+              <td>
+                <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
+                <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_delete_user'])) ?>');">
+                  <input type="hidden" name="benutzername_loeschen" value="<?= htmlspecialchars($eintrag['benutzername']) ?>">
+                  <button type="submit" class="btn btn-sm btn-danger"><?= $texts['remove']?></button>
                 </form>
+                <?php else: ?>
+                <span class="text-muted">Admin Account</span>
+                <?php endif; ?>
+              </td>
             </tr>
+            <?php endforeach; ?>
 
+            <!-- Neue Benutzer-Zeile -->
+            <tr>
+              <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_add_user'])) ?>');">
+                <td>
+                  <input type="text" maxlength="35" name="benutzernameEingabe" class="form-control form-control-sm" placeholder="<?= $texts['username']?>" required>
+                </td>
+                <td>
+                  <input type="password" maxlength="35" name="passwortEingabe" class="form-control form-control-sm" placeholder="<?= $texts['temporary_password']?>" required>
+                </td>
+                <td>
+                  <select name="sollArbeitszeitEingabe" class="form-select form-select-sm">
+                    <option value="30">30 <?= $texts['hours']?></option>
+                    <option value="35">35 <?= $texts['hours']?></option>
+                    <option value="40">40 <?= $texts['hours']?></option>
+                  </select>
+                </td>
+                <td>
+                  <input type="date" name="gebEingabe" class="form-control form-control-sm" required>
+                </td>
+                <td colspan="2">
+                  <select name="language" class="form-select form-select-sm">
+                    <option value="de"><?= $texts['german']?></option>
+                    <option value="en"><?= $texts['english']?></option>
+                  </select>
+                </td>
+                <td colspan="2">
+                  <button type="submit" name="benutzerHinzufuegen" class="btn btn-sm btn-success w-100"><?= $texts['add_user']?></button>
+                </td>
+              </form>
+            </tr>
+          </tbody>
         </table>
-
-        </section>
-        
-        </section>
-    </main>
-    <footer>
-        <p>footer</p>
-    </footer>
+      </div>
+    </div>
+  </main>
 </body>
-
 </html>

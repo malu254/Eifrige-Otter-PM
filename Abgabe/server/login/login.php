@@ -9,6 +9,8 @@ $empfangeneDaten = $_GET['data'];
 $loginSeite = $_GET['site'];
 $error = $_GET['error'];
 
+$texts = include __DIR__ . "/../webseite/language/{$_SESSION['lang']}.php";
+
 // Überprüft, ob die Anfrage per POST gesendet wurde
 if ($_SERVER["REQUEST_METHOD"] == "POST") 
 {
@@ -57,12 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     }
 }
 
-if ($_SESSION['lang'] === 'en') 
-{
-    include 'login_en.html';
-} 
-else 
-{
-    include 'login_de.html';
-}
+include 'login.html';
+
 ?>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?php echo $loginSeite; ?> Anmeldung
+        <?= $texts['login']?>
     </title>
     <link rel="stylesheet" type="text/css" href="../webseite/style/login.css" />
 
@@ -20,11 +20,11 @@
         <form method="post">
             <div class="login_card">
                 <h2 id="logo">
-                    <!-- <?php echo $loginSeite; ?> --> Anmeldung
+                    <!-- <?php echo $loginSeite; ?> --> <?= $texts['login']?>
                 </h2>
-                <input type="text" maxlength="35" name="benutzernameFormular" placeholder="Benutzername" id="bName">
-                <input type="password" name="passwortFormular" placeholder="Passwort" id="passwort">
-                <input type="submit" name="submit" value="Anmelden" id="submit_button">
+                <input type="text" maxlength="35" name="benutzernameFormular" placeholder="<?= $texts['username']?>" id="bName">
+                <input type="password" name="passwortFormular" placeholder="<?= $texts['password']?>" id="passwort">
+                <input type="submit" name="submit" value="<?= $texts['submit']?>" id="submit_button">
                 <div style="font-size:11px; color:#cc0000; margin-top:10px">
                     <?php echo isset($error) ? htmlspecialchars($error) : ''; ?>
                 </div>
