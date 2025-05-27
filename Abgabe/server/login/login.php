@@ -9,6 +9,12 @@ $empfangeneDaten = $_GET['data'];
 $loginSeite = $_GET['site'];
 $error = $_GET['error'];
 
+// Standard
+if(!isset($_SESSION['lang']))
+{
+    $_SESSION['lang'] = 'de';
+}
+
 $texts = include __DIR__ . "/../webseite/language/{$_SESSION['lang']}.php";
 
 // Überprüft, ob die Anfrage per POST gesendet wurde
@@ -29,6 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $row = mysqli_fetch_assoc($result);
         $db_passwort = $row["passwort"];
+        $_SESSION['lang'] = $row['lang'];
 
         // Passwortüberprüfung mit password_verify
         if ($passwort == $db_passwort)
