@@ -49,22 +49,7 @@ if ($data === null) {
 // Beispiel: Zugriff auf die Werte
 $funktion = $data['function'] ?? null;
 
-if ($funktion == "foo") {
-
-	$nutzer_id = $data['nutzer_id'] ?? null;
-
-
-    $stmt = $conn->prepare("SELECT benutzername FROM user WHERE id = $nutzer_id");
-    $stmt->execute();
-    $stmt->bind_result($benutzer_name);
-    $stmt->fetch();
-    $stmt->close();
-
-	respond_json([
-		"name" => $benutzer_name
-	]);
-
-}elseif ($funktion == "get_notifications") {
+if ($funktion == "get_notifications") {
 	$nutzer_id = $data["user_id"] ?? null;
 
 	$nachrichten = sql_querry("SELECT * FROM notification WHERE benutzer_id = $nutzer_id");
@@ -75,15 +60,24 @@ if ($funktion == "foo") {
 
 }elseif ($funktion == "get_id_by_name") {
 	$nutzer_name = $data["user_name"] ?? null;
-	$nutzer_name = "test";
 	$nutzer_id = sql_querry("SELECT id FROM user WHERE benutzername = \"$nutzer_name\"");
 	respond_json([
-		"nutzer_id" => $nutzer_id[0]
+		"user_id" => $nutzer_id[0]["id"]
 	]);
 }elseif ($funktion == "get_times") {
-	$nutzer_id = $data["user_id"] ?? null;
+	$user_id = $data["user_id"] ?? null;
+
+	$times = sql_querry("SELECT zeitpunkt, aktion FROM zeiterfassung WHERE benutzer_id = \"$user_id\" ORDER BY zeitpunkt DESC");
+	respond_json([
+		"times" => $times
+	]);
 
 }elseif ($funktion == "get_lang") {
+	$user_id = $data["user_id"] ?? null;
+	$lang = sql_querry("SELECT lang FROM user WHERE id = \"$user_id\"");
+	respond_json([
+		"lang" => $lang[0]
+	]);
 
 }elseif ($funktion == "get_sollArbeitszeit") {
 
