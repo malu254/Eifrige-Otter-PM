@@ -126,9 +126,41 @@ if ($funktion == "get_notifications") {
 
 }elseif ($funktion == "change_lang") {
 	$user_id = $data["user_id"] ?? null;
+	$lang    = $data["lang"]    ?? null;
+
+	$result = sql_querry("UPDATE user SET lang = \"$lang\" WHERE id = \"$user_id\"");
+	respond_json([
+		"respons" => $result
+	]);
 
 }elseif ($funktion == "change_password") {
 	$user_id = $data["user_id"] ?? null;
+	$new_password = $data["new_password"] ?? null;
+	$result = sql_querry("UPDATE user SET passwort = \"$new_password\" WHERE id = \"$user_id\"");
+	respond_json([
+		"respons" => $result
+	]);
 
+}elseif ($funktion == "validate_user") {
+	$user_name = $data["user_name"] ?? null;
+	$password = $data["password"] ?? null;
+	$result = sql_querry("SELECT * FROM user WHERE benutzername = \"$user_name\"");
+	if (count($result) <= 0) {
+		respond_json([
+			"is_valid" => False
+		]);
+		exit;
+	}
+
+	$db_passwort = $result[0]["passwort"];
+	if ($password === $db_passwort) {
+		respond_json([
+			"is_valid" => True,
+		]);
+	}else {
+		respond_json([
+			"is_valid" => False,
+		]);
+	}
 }
 ?>
