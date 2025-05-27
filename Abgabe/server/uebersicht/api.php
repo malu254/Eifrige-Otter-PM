@@ -16,6 +16,9 @@ function sql_querry($querry) {
 		$stmt->execute();
 
 		$result = $stmt->get_result();
+		if (!$result) {
+			return ;
+		}
 		$rows = [];
 
 		while ($row = $result->fetch_assoc()) {
@@ -80,20 +83,52 @@ if ($funktion == "get_notifications") {
 	]);
 
 }elseif ($funktion == "get_sollArbeitszeit") {
+	$user_id = $data["user_id"] ?? null;
+	$arbeits_zeit = sql_querry("SELECT sollArbeitszeit FROM user WHERE id = \"$user_id\"");
+	respond_json([
+		"sollArbeitszeit" => $arbeits_zeit[0]["sollArbeitszeit"]
+	]);
 
 }elseif ($funktion == "get_status") {
-
+	$user_id = $data["user_id"] ?? null;
+	$status = sql_querry("SELECT status FROM user WHERE id = \"$user_id\"");
+	respond_json([
+		"status" => $status[0]["status"]
+	]);
 }elseif ($funktion == "get_fehlzeit") {
+	$user_id = $data["user_id"] ?? null;
+	$fehl_zeit = sql_querry("SELECT fehlzeit FROM user WHERE id = \"$user_id\"");
+	respond_json([
+		"fehlzeit" => $fehl_zeit[0]["fehlzeit"]
+	]);
 
 }elseif ($funktion == "get_konto") {
+	$user_id = $data["user_id"] ?? null;
+	$konto = sql_querry("SELECT konto FROM user WHERE id = \"$user_id\"");
+	respond_json([
+		"konto" => $konto[0]["konto"]
+	]);
 
 }elseif ($funktion == "user_kommen") {
+	$user_id = $data["user_id"] ?? null;
+
+	$result = sql_querry("UPDATE user SET status = 1 WHERE id = \"$user_id\"");
+	respond_json([
+		"respons" => $response
+	]);
 
 }elseif ($funktion == "user_gehen") {
+	$user_id = $data["user_id"] ?? null;
+	$result = sql_querry("UPDATE user SET status = 0 WHERE id = \"$user_id\"");
+	respond_json([
+		"respons" => $response
+	]);
 
 }elseif ($funktion == "change_lang") {
+	$user_id = $data["user_id"] ?? null;
 
 }elseif ($funktion == "change_password") {
+	$user_id = $data["user_id"] ?? null;
 
 }
 ?>
