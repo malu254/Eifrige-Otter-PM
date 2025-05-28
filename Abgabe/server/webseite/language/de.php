@@ -32,7 +32,7 @@ return [
   'timemanagement' => 'Zeiterfassung',
   'login' => 'Anmeldung',
   'username' => 'Benutzername',
-  'submit' => 'Anmelden',
+  'submitLogin' => 'Anmelden',
   'status' => 'Status',
   'absence' => 'Fehlzeit',
   'language' => 'Sprache',
@@ -48,6 +48,11 @@ return [
   'hours' => ' Stunden',
   'Abwesend' => 'Abwesend',
   'Anwesend' => 'Anwesend',
+  'Monday'=> 'Montag',
+  'Tuesday'=> 'Dienstag',
+  'Wednesday'=> 'Mittwoch',
+  'Thursday'=> 'Donnerstag',
+  'Friday'=> 'Freitag',
 ];
 
 ?>

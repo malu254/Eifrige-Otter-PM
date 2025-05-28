@@ -14,7 +14,8 @@ function post(destination, action, value) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    const datumInput = document.getElementById('datumInput');
+  
+  const datumInput = document.getElementById('datumInput');
   const form = document.getElementById('datumForm');
   const vorherBtn = document.getElementById('vorheriges');
   const naechstesBtn = document.getElementById('naechstes');
@@ -26,8 +27,8 @@ document.addEventListener("DOMContentLoaded", function() {
     form.submit();
   }
 
-  vorherBtn.addEventListener('click', () => verschiebeDatum(-1));
-  naechstesBtn.addEventListener('click', () => verschiebeDatum(1));
+  vorherBtn.addEventListener('click', () => verschiebeDatum(-5));
+  naechstesBtn.addEventListener('click', () => verschiebeDatum(5));
 
   datumInput.addEventListener('change', function () {
     form.submit();

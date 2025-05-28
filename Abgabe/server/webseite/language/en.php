@@ -32,7 +32,7 @@ return [
   'timemanagement' => 'Timemanagement',
   'login' => 'Login',
   'username' => 'Username',
-  'submit' => 'Login',
+  'submitLogin' => 'Login',
   'status' => 'Status',
   'absence' => 'Absence',
   'language' => 'Language',
@@ -48,6 +48,11 @@ return [
   'hours' => ' Hours',
   'Abwesend' => 'Absent',
   'Anwesend' => 'Present',
+  'Monday'=> 'Monday',
+  'Tuesday'=> 'Tuesday',
+  'Wednesday'=> 'Wednesday',
+  'Thursday'=> 'Thursday',
+  'Friday'=> 'Friday',
 ];
 
 ?>

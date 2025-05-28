@@ -18,41 +18,58 @@
 
           <!-- Tabelle Zeiten Board mit Einträgen -->
           <div class="overflow-auto flex-grow-1 mb-2">
-            <table class="table table-light mb-0">
-              <thead>
-                <th><?= $texts['date']?></th>
-                <th><?= $texts['action']?></th>
-                <th><?= $texts['time']?></th>
-                </tr>
-              </thead>
-              <tbody>
+              <?php
+              $heute = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
+              $timestamp = strtotime($heute);
+              $wochentag = date("N", $timestamp); // 1 (Mo) bis 7 (So)
+              $montag = strtotime("-" . ($wochentag - 1) . " days", $timestamp);
 
-                <?php
-                  $ausgewaehltesDatum = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
+              $tage = [];
+              for ($i = 0; $i < 5; $i++) {
+                  $datum = date("Y-m-d", strtotime("+$i days", $montag));
+                  $tage[$datum] = [];
+              }
 
-                  foreach ($eintraege as $eintrag): 
-                      $eintragsDatum = date("Y-m-d", strtotime($eintrag['zeitpunkt']));
-                      if ($eintragsDatum === $ausgewaehltesDatum):
-                          $datum = date("d.m.Y", strtotime($eintrag['zeitpunkt']));
-                          $uhrzeit = date("H:i", strtotime($eintrag['zeitpunkt']));
-                  ?>
-                <tr>
-                  <td>
-                    <?= $datum ?>
-                  </td>
-                  <td>
-                    <?= $texts[$eintrag['aktion']]?>
-                  </td>
-                  <td>
-                    <?= $uhrzeit ?>
-                  </td>
-                </tr>
-                <?php 
-                      endif;
-                  endforeach;
-                  ?>
-              </tbody>
-            </table>
+              // Einträge den Tagen zuordnen
+              foreach ($eintraege as $eintrag) {
+                  $eintragsDatum = date("Y-m-d", strtotime($eintrag['zeitpunkt']));
+                  if (array_key_exists($eintragsDatum, $tage)) {
+                      $tage[$eintragsDatum][] = $eintrag;
+                  }
+              }
+              ?>
+
+              <table class="table table-light mb-0">
+                <thead>
+                  <tr>
+                    <th><?= $texts['date']?></th>
+                    <th><?= $texts['action']?></th>
+                    <th><?= $texts['time']?></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($tage as $datumKey => $eintraegeAmTag): ?>
+                    <tr class="table-secondary">
+                      <td colspan="3"><strong><?= $texts[date("l", strtotime($datumKey))] ?> <?= date("d.m.Y", strtotime($datumKey)) ?></strong></td>
+                    </tr>
+
+                    <?php if (count($eintraegeAmTag) > 0): ?>
+                      <?php foreach ($eintraegeAmTag as $eintrag): ?>
+                        <tr>
+                          <td><?= date("d.m.Y", strtotime($eintrag['zeitpunkt'])) ?></td>
+                          <td><?= $texts[$eintrag['aktion']] ?></td>
+                          <td><?= date("H:i", strtotime($eintrag['zeitpunkt'])) ?></td>
+                        </tr>
+                      <?php endforeach; ?>
+                    <?php else: ?>
+                      <tr>
+                        <td colspan="3"><em><?= $texts['no_entries'] ?? 'Keine Einträge' ?></em></td>
+                      </tr>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
+                </tbody>
+              </table>
+
           </div>
 
           <!-- Aktionsbuttons -->

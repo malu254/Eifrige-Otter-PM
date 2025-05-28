@@ -9,8 +9,8 @@ $empfangeneDaten = $_GET['data'];
 $loginSeite = $_GET['site'];
 $error = $_GET['error'];
 
-// Standard
-if(!isset($_SESSION['lang']))
+// Standard Sprache
+if (!isset($_SESSION['lang']))
 {
     $_SESSION['lang'] = 'de';
 }
@@ -35,12 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $row = mysqli_fetch_assoc($result);
         $db_passwort = $row["passwort"];
-        $_SESSION['lang'] = $row['lang'];
 
         // Passwortüberprüfung mit password_verify
         if ($passwort == $db_passwort)
         {
             $_SESSION['login_user'] = $benutzername; // Setzt den Benutzernamen in der Session
+            $_SESSION['lang'] = $row["lang"];
 
             // Aktualisiert den letzten Login-Zeitpunkt des Benutzers
             $update_sql = "UPDATE user SET letzter_login=NOW() WHERE benutzername ='$benutzername'";
@@ -62,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     else 
     {
         // Wenn die Eingaben falsch sind, wird eine Fehlermeldung angezeigt
-        $error = "Falscher Benutzername!";
+        $error = "Benutzer existiert nicht!";
     }
 }
 
