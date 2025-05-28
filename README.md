@@ -31,15 +31,15 @@ admin/admin
 
 - [x] Nutzer müssen sich einloggen können (Security)
 - [ ] Arbeitszeiten müssen exportiert werden können
-- [ ] Es muss eine API geben, um auf das System zuzugreifen
+- [x] Es muss eine API geben, um auf das System zuzugreifen
 - [x] Software sollte in HTML/CSS/JavaScript geschrieben werden
 - [x] Lauffähiger Web-Server zur Hosting der Zeiterfassung erforderlich
 - [x] Plattformunabhängige Software (Windows, macOS)
 - [x] Verwendung einer lizenzfreien Datenbank
-- [ ] Performante Zeiterfassung
+- [x] Performante Zeiterfassung
 - [x] Sichere Datenübertragung via HTTPS
 - [x] Versionsverwaltung via GIT
-- [ ] Skalierbare Weboberfläche
+- [x] Skalierbare Weboberfläche
 - [x] Arbeitsstatus der Nutzer erkennen
 - [x] Doppeleingaben blockieren
 - [x] Arbeitszeitmodellzuweisung für Mitarbeiter
@@ -52,7 +52,7 @@ admin/admin
 - [ ] Nutzer muss initiales Passwort hinzufügen
 - [x] Admin kann Nutzer bearbeiten, löschen, hinzufügen
 - [x] Sprache muss gewechselt werden können, ohne Neustart
-- [ ] Terminals in Büroräumen erforderlich
+- [x] Terminals in Büroräumen erforderlich
 - [ ] Erinnerung bei Überschreitung/Unterschreitung der Arbeitszeit
 - [ ] Einhaltung der Ruhezeit nach Arbeitsschutzgesetz (min. 11h)
 - [ ] Max. Wochenarbeitszeit nur mit Genehmigung überschreitbar
