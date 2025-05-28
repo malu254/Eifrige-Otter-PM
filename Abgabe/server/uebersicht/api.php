@@ -153,13 +153,15 @@ if ($funktion == "get_notifications") {
 	}
 
 	$db_passwort = $result[0]["passwort"];
-	if ($password === $db_passwort) {
+	if ($db_passwort === $passwort) {
 		respond_json([
 			"is_valid" => True,
 		]);
 	}else {
 		respond_json([
 			"is_valid" => False,
+			"pw" => $password,
+			"dpw" => $db_passwort
 		]);
 	}
 }
