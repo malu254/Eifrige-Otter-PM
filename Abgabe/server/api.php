@@ -45,7 +45,8 @@ $data = json_decode($json, true);  // true = als assoziatives Array
 if ($data === null) {
     // Fehler beim Decodieren
     http_response_code(400);
-    echo json_encode(['error' => 'Ungültiges JSON']);
+    echo json_encode(['error' => 'invalid JSON']);
+	echo $json;
     exit;
 }
 
@@ -61,6 +62,11 @@ if ($funktion == "get_notifications") {
 		"notifications" => $nachrichten
 	]);
 
+}elseif ($funktion == "get_current_user") {
+	session_start();
+	respond_json([
+		"user_name" => $_SESSION["login_user"]
+	]);
 }elseif ($funktion == "get_id_by_name") {
 	$nutzer_name = $data["user_name"] ?? null;
 	$nutzer_id = sql_querry("SELECT id FROM user WHERE benutzername = \"$nutzer_name\"");

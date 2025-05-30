@@ -143,7 +143,7 @@
         </div>
 
         <div class="overflow-auto flex-grow-1 mb-2">
-          <table class="table table-light mb-0">
+          <table class="table table-light mb-0" id="times_table">
             <thead>
               <th>Datum</th>
               <th>Aktion</th>
@@ -151,31 +151,17 @@
               </tr>
             </thead>
             <tbody>
-
-              <?php
-                $ausgewaehltesDatum = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
-
-                foreach ($eintraege as $eintrag): 
-                    $eintragsDatum = date("Y-m-d", strtotime($eintrag['zeitpunkt']));
-                    if ($eintragsDatum === $ausgewaehltesDatum):
-                        $datum = date("d.m.Y", strtotime($eintrag['zeitpunkt']));
-                        $uhrzeit = date("H:i", strtotime($eintrag['zeitpunkt']));
-                ?>
               <tr>
                 <td>
-                  <?= $datum ?>
+                  Keine Daten
                 </td>
                 <td>
-                  <?= $eintrag['aktion'] ?>
+                  Keine Daten
                 </td>
                 <td>
-                  <?= $uhrzeit ?>
+                  Keine Daten
                 </td>
               </tr>
-              <?php 
-                    endif;
-                endforeach;
-                ?>
             </tbody>
           </table>
         </div>
@@ -296,14 +282,38 @@
   const language_check = document.getElementById("language_switch")
   const notificationBtn = document.getElementById("notification-btn")
 
-  function check_for_notifications(event) {
-    const notification_body = document.getElementById("notification-body")
-    fetch("api.php", {
+  async function get_user_name() {
+    const response = await fetch("http://localhost/api.php", {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json',
+        credentials: "include"
       },
-      body: "function=get-notification"
+      body: JSON.stringify({
+        function: "get_current_user",
+      })
+    })
+
+    if (!response.ok) {
+      throw new Error("error in get_user_name")
+    }
+
+    return await response.json()
+  }
+
+
+
+  function check_for_notifications(event) {
+    const notification_body = document.getElementById("notification-body")
+    fetch("http://localhost/api.php", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        credentials: "include"
+      },
+      body: JSON.stringify({
+        function: "get_current_user",
+      })
     })
       .then(response => {
         if (!response.ok) throw new Error('Netzwerkfehler');
@@ -318,6 +328,47 @@
   notificationBtn.addEventListener("click", check_for_notifications)
 
 
+  function update_times() {
+    const table = document.getElementById("times_table")
+    for (let i = 1; i < table.rows.length; i++) {
+      table.deleteRow(1)
+    }
+    
+    fetch("http://localhost/api.php", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        function: "get_times",
+        user_id: 10
+      })
+    })
+      .then(response => {
+        if (!response.ok) throw new Error('Netzwerkfehler');
+        return response.json();
+      })
+      .then(data => {
+        if(!data.times) throw new Error("didn't get any times")
+
+        const times_arr = data.times
+        
+        times_arr.forEach(element => {
+          
+          const new_row = table.insertRow(1)
+          const new_uhrzeit = new_row.insertCell(0)
+          const new_aktion = new_row.insertCell(0)
+          const new_datum = new_row.insertCell(0)
+
+          new_datum.innerHTML = element.zeitpunkt.slice(0,9)
+          new_aktion.innerHTML = element.aktion
+          new_uhrzeit.innerHTML = element.zeitpunkt.slice(11,16)
+
+        });
+        
+      })
+
+  }
 
 
   function verschiebeDatum(tage) {
@@ -364,6 +415,9 @@
     })
   }
 
+  update_times()
+  
+  
 
 
 </script>

@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# index.html ignorieren
+RewriteCond %{REQUEST_URI} ^/index\.html$ [NC]
+RewriteRule ^ - [L]
+
+# Wenn eine .php-Datei existiert, diese verwenden
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([^\.]+)$ $1.php [L]
+
+# Spezielle Rewrite-Regel für login
+RewriteRule ^login/([a-zA-Z0-9_-]+)$ /login/login.php?data=$1 [QSA,L]
+
+# Alles andere auf index.php umleiten
+RewriteCond %{REQUEST_URI} !^/index\.php$ [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^.*$ /index.php [L]
