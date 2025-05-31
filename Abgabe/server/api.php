@@ -148,31 +148,26 @@ if ($funktion == "get_notifications") {
 	]);
 
 }elseif ($funktion == "validate_user") {
-	include("/home/admin/datenbank_verbindung.php");
-	$user_name = $data["user_name"] ?? null;
-	$password = $data["password"] ?? null;
+		include("/home/admin/datenbank_verbindung.php");
+        $user_name = $data["user_name"] ?? null;
+        $password = $data["password"] ?? null;
 
-	$stmt = $conn->prepare("SELECT passwort FROM user WHERE benutzername = :user_name");
-	$stmt->execute(["user_name" => $user_name]);
-	$user = $stmt->fetch();
 
-	if (!$user) {
-		respond_json([
-			"is_valid" => False
-		]);
-		exit;
-	}
+        $stmt = $conn->prepare("SELECT passwort FROM user WHERE benutzername = ?");
+        $stmt->bind_param("s",$user_name);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-	if ($password == $user["passwort"]) {
-		respond_json([
-			"is_valide" => True
-		]);
-		exit;
-	}
+        if ($row = $result->fetch_assoc()) {
+                if ($password === $row["passwort"]) {
+                        respond_json(["is_valid" => True]);
+                } else {
+                        respond_json(["is_valid" => False]);
+                }
+        } else {
+                respond_json(["is_valid" => False]);
+        }
 
-	respond_json([
-		"is_valide" => False
-	]);
 	
 }
 ?>
