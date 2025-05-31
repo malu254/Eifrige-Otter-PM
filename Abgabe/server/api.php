@@ -46,7 +46,7 @@ if ($data === null) {
     // Fehler beim Decodieren
     http_response_code(400);
     echo json_encode(['error' => 'invalid JSON']);
-	echo $json;
+	echo phpinfo();
     exit;
 }
 
@@ -148,27 +148,31 @@ if ($funktion == "get_notifications") {
 	]);
 
 }elseif ($funktion == "validate_user") {
+	include("/home/admin/datenbank_verbindung.php");
 	$user_name = $data["user_name"] ?? null;
 	$password = $data["password"] ?? null;
-	$result = sql_querry("SELECT * FROM user WHERE benutzername = \"$user_name\"");
-	if (count($result) <= 0) {
+
+	$stmt = $conn->prepare("SELECT passwort FROM user WHERE benutzername = :user_name");
+	$stmt->execute(["user_name" => $user_name]);
+	$user = $stmt->fetch();
+
+	if (!$user) {
 		respond_json([
 			"is_valid" => False
 		]);
 		exit;
 	}
 
-	$db_passwort = $result[0]["passwort"];
-	if ($db_passwort === $passwort) {
+	if ($password == $user["passwort"]) {
 		respond_json([
-			"is_valid" => True,
+			"is_valide" => True
 		]);
-	}else {
-		respond_json([
-			"is_valid" => False,
-			"pw" => $password,
-			"dpw" => $db_passwort
-		]);
+		exit;
 	}
+
+	respond_json([
+		"is_valide" => False
+	]);
+	
 }
 ?>
