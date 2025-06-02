@@ -16,6 +16,21 @@ async function get_user() {
     user = await respons.json().user
 }
 
+window.addEventListener("DOMContentLoaded", async () => {
+    try {
+        await get_user(); // wartet auf Abschluss
+        main()
+    } catch (error) {
+        console.error("Fehler beim Laden des Benutzers:", error);
+    }
+});
+
+function main() {
+
+document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
+document.getElementById("btn_kommen").addEventListener("click",button_kommen_even)
+}
+
 function button_kommen_even() {
     console.log("kommen");
     post('index.php', 'aktion', 'Kommen')
@@ -31,12 +46,8 @@ function button_kommen_even() {
         })
     })
 }
-document.getElementById("btn_kommen").addEventListener("click",button_kommen_even)
 
 function button_gehen_even() {
     console.log("gehen");
     post('index.php', 'aktion', 'Gehen')
 }
-document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
-
-get_user()
