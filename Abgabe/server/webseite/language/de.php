@@ -53,6 +53,8 @@ return [
   'Wednesday'=> 'Mittwoch',
   'Thursday'=> 'Donnerstag',
   'Friday'=> 'Freitag',
+  'initialPassword'=> 'Benutzerdefiniertes Passwort setzen',
+  'no_entries'=> 'Keine Einträge',
 ];
 
 ?>
