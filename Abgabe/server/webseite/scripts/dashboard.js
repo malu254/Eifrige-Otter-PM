@@ -34,8 +34,6 @@ document.getElementById("btn_kommen").addEventListener("click",button_kommen_eve
 }
 
 function button_kommen_even() {
-    console.log("kommen");
-
     fetch("https://zeitbuchung.it-lutz.com/api.php",{
         method:"POST",
         headers: {
@@ -56,6 +54,21 @@ function button_kommen_even() {
 }
 
 function button_gehen_even() {
-    console.log("gehen");
-    post('index.php', 'aktion', 'Gehen')
+    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+        method:"POST",
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            "function":"user_gehen",
+            "user_id":user.id
+        })
+    })
+    .then(respons => {
+        if (!respons.ok) throw new Error("failed to kommen")
+        return respons.json()
+    })
+    .then(data => {
+        console.log(data);
+    })
 }
