@@ -58,18 +58,6 @@ error_reporting(E_ALL);
             $types .= 's';
         }
 
-        if (isset($_POST['aktion']) && in_array($_POST['aktion'], ['Kommen', 'Gehen', 'Frei'])) {
-            $aktion = $_POST['aktion'];
-            $stmt = $conn->prepare("INSERT INTO zeiterfassung (benutzer_id, aktion) VALUES (?, ?)");
-            $stmt->bind_param("is", $benutzer_id, $aktion);
-            $stmt->execute();
-            $stmt->close();
-
-            $status = ($aktion == 'Kommen') ? 'Anwesend' : 'Abwesend';
-            $updates[] = "status = ?";
-            $params[] = $status;
-            $types .= 's';
-        }
         
         // Nur wenn es Änderungen gibt
         if (!empty($updates)) {

@@ -15,7 +15,6 @@ async function get_user() {
     if (!respons.ok) throw new Error("respons error")
     let data = await respons.json()
     user = data.user
-    console.log(user);
     
 }
 
@@ -36,7 +35,6 @@ document.getElementById("btn_kommen").addEventListener("click",button_kommen_eve
 
 function button_kommen_even() {
     console.log("kommen");
-    post('index.php', 'aktion', 'Kommen')
 
     fetch("https://zeitbuchung.it-lutz.com/api.php",{
         method:"POST",
@@ -47,6 +45,13 @@ function button_kommen_even() {
             "function":"user_kommen",
             "user_id":user.id
         })
+    })
+    .then(respons => {
+        if (!respons.ok) throw new Error("failed to kommen")
+        return respons.json()
+    })
+    .then(data => {
+        console.log(data);
     })
 }
 
