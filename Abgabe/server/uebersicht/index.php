@@ -84,7 +84,7 @@ error_reporting(E_ALL);
     }
 
 
-
+/*
     // Nachrichten
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['get-notification'])) {
         header('Content-Type: application/json');
@@ -101,6 +101,7 @@ error_reporting(E_ALL);
         echo json_encode($nachrichten);
         exit(); // Ganz wichtig!
     }
+        */
 
     
     // Einträge für Zeitmanagement Tabelle holen
