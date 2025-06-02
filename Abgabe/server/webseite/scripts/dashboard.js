@@ -1,7 +1,7 @@
 let user
 
 async function get_user() {
-    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+    let respons = await fetch("https://zeitbuchung.it-lutz.com/api.php",{
         method:"POST",
         credentials:"include",
         headers:{
@@ -11,13 +11,9 @@ async function get_user() {
             "function":"get_current_user"
         })
     })
-    .then(respons => {
-        if (!respons.ok) throw new Error("respons error")
-        return respons.json()
-    })
-    .then(data => {
-        user = data
-    })
+
+    if (!respons.ok) throw new Error("respons error")
+    user = respons.json()
 }
 
 function button_kommen_even() {
