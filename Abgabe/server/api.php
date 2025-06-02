@@ -128,7 +128,7 @@ if ($funktion == "get_notifications") {
 		exit;
 	}
 
-	$t = time();
+	$t = date("Y-m-d H-i-s");
 	sql_querry("insert into zeiterfassung (benutzer_id,aktion,zeitpunkt) values (10,\"Kommen\",\"$t\")");
 
 	$result = sql_querry("UPDATE user SET status = 1 WHERE id = \"$user_id\"");
@@ -147,7 +147,7 @@ if ($funktion == "get_notifications") {
 		exit;
 	}
 
-	$t = time();
+	$t = date("Y-m-d H-i-s");
 	sql_querry("insert into zeiterfassung (benutzer_id,aktion,zeitpunkt) values (10,\"Gehen\",\"$t\")");
 
 	$result = sql_querry("UPDATE user SET status = 0 WHERE id = \"$user_id\"");
