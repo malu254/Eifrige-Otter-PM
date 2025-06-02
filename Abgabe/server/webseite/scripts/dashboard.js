@@ -27,10 +27,9 @@ function button_kommen_even() {
         headers: {
             "Content-Type":"application/json"
         },
-        body:{
-            function:"user_kommen",
-
-        }
+        body:JSON.stringify({
+            "function":"user_kommen"
+        })
     })
 }
 document.getElementById("btn_kommen").addEventListener("click",button_kommen_even)
