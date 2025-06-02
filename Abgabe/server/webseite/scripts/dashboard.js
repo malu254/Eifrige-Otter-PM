@@ -96,7 +96,11 @@ function load_notifications() {
         return respons.json()
     })
     .then(data => {
-        console.log(data);
+        data.notifications.forEach(element => {
+            const new_p = document.createElement("p")
+            new_p.innerText = element.text
+            note_body.appendChild(new_p)
+        });
     })
 }
 
