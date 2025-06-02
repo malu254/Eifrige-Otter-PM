@@ -3,6 +3,7 @@ let user
 async function get_user() {
     fetch("https://zeitbuchung.it-lutz.com/api.php",{
         method:"POST",
+        credentials:"include",
         headers:{
             "Content-Type":"application/json"
         },
