@@ -64,7 +64,8 @@ if ($funktion == "get_notifications") {
 
 }elseif ($funktion == "get_current_user") {
 	session_start();
-	$result = sql_querry("SELECT * FROM user WHERE benutzername = \"$_SESSION["login_user"]\"")
+	$user_name = $_SESSION["login_user"];
+	$result = sql_querry("SELECT * FROM user WHERE benutzername = \"$_SESSION["login_user"]\"");
 	respond_json([
 		"user" => $result[0]
 	]);
