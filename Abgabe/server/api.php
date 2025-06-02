@@ -66,6 +66,7 @@ if ($funktion == "get_notifications") {
 	session_start();
 	$user_name = $_SESSION["login_user"];
 	echo $user_name;
+	echo "wheeee";
 }elseif ($funktion == "get_id_by_name") {
 	$nutzer_name = $data["user_name"] ?? null;
 	$nutzer_id = sql_querry("SELECT id FROM user WHERE benutzername = \"$nutzer_name\"");
