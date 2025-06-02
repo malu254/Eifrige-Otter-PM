@@ -114,7 +114,6 @@ error_reporting(E_ALL);
     }
     $stmt->close();
 
-    include '../webseite/navbar/navbar.html';
     include 'dashboard.html';
     
 ?>
