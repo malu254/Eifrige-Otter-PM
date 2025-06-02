@@ -91,6 +91,8 @@ function load_notifications() {
     })
     .then(respons => {
         if (!respons.ok) throw new Error("result error")
+        console.log(respons.text());
+        
         return respons.json()
     })
     .then(data => {
