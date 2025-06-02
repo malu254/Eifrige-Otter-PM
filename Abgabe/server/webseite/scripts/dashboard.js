@@ -1,7 +1,8 @@
+const url = "https://zeitbuchung.it-lutz.com/api.php"
 let user
 
 async function get_user() {
-    let respons = await fetch("https://zeitbuchung.it-lutz.com/api.php",{
+    let respons = await fetch(url,{
         method:"POST",
         credentials:"include",
         headers:{
@@ -35,7 +36,7 @@ document.getElementById("notification-btn").addEventListener("click",load_notifi
 }
 
 function button_kommen_even() {
-    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+    fetch(url,{
         method:"POST",
         headers: {
             "Content-Type":"application/json"
@@ -56,7 +57,7 @@ function button_kommen_even() {
 }
 
 function button_gehen_even() {
-    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+    fetch(url,{
         method:"POST",
         headers: {
             "Content-Type":"application/json"
@@ -79,7 +80,7 @@ function button_gehen_even() {
 function load_notifications() {
     const note_body = document.getElementById("notification-body")
 
-    fetch("https://zeitbuchung.it-lutz.com",{
+    fetch(url,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
@@ -101,7 +102,7 @@ function load_notifications() {
 }
 
 function get_times() {
-    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+    fetch(url,{
         method:"POST",
         headers:{
             "Content-Type":"application/json"
