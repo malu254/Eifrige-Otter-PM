@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <?= $texts['login']?>
+    </title>
+    <link rel="stylesheet" type="text/css" href="../webseite/style/login.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+    </style>
+</head>
+
+
+<body>
+    <div id="outer_border">
+        <form method="post">
+            <div class="login_card">
+                <h2 id="logo">
+                    <!-- <?php echo $loginSeite; ?> -->  <?= $texts['initialPassword']?>
+                </h2>
+                <input type="password" name="passwortFormular" placeholder="<?= $texts['password']?>" id="passwort">
+                <input onclick="" type="submit" name="submit" value="<?= $texts['submitLogin']?>" id="submit_button">
+                <div style="font-size:11px; color:#cc0000; margin-top:10px">
+                    <?php echo isset($error) ? htmlspecialchars($error) : ''; ?>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<script>
+
+</script>
+</html>

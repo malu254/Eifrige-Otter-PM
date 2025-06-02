@@ -80,9 +80,10 @@ error_reporting(E_ALL);
                 if ($stmt->num_rows === 0) {
                     $stmt->close();
 
+                    $ersterLogin = 1;
                     // Benutzer einfügen
-                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, lang) VALUES (?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssss", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $sprache);
+                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, lang, ersterLogin) VALUES (?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssssi", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $sprache, $ersterLogin);
                     $stmt->execute();
                     $stmt->close();
                 } else {
@@ -125,8 +126,5 @@ error_reporting(E_ALL);
     $stmt->close();
     $conn->close();
 
-
-
-    include '../webseite/navbar/navbar.html';
     include 'leitung.html';
 ?>
