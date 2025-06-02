@@ -7,8 +7,8 @@ async function get_user() {
         "Content-Type":"application/json"
     },
     body:{
-        function:"get_id_by_name",
-        user_name:"test"
+        function:"get_status",
+        user_id:10
     }
   });
   if (!response.ok) {
