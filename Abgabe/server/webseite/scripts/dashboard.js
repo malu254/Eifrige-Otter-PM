@@ -1,24 +1,21 @@
 let user
 
 async function get_user() {
-  const response = await fetch("https://zeitbuchung.it-lutz.com/api.php",{
-    method:"POST",
-    headers:{
-        "Content-Type":"application/json"
-    },
-    body:{
-        function:"get_status",
-        user_id:10
-    }
-  });
-  if (!response.ok) {
-    console.error('Fehler beim Laden der API:', response.status);
-    return;
-  }
-
-  user = await response.json();
-  console.log('User geladen:', user);
-
+    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:{
+            "function":"get_current_user"
+        }
+    })
+    .then(respons => {
+        return respons.json()
+    })
+    .then(data => {
+        console.log(data);
+    })
 }
 
 function button_kommen_even() {
