@@ -14,6 +14,8 @@ async function get_user() {
 
     if (!respons.ok) throw new Error("respons error")
     user = await respons.json().user
+    console.log(user);
+    
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
