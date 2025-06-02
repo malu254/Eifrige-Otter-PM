@@ -11,7 +11,7 @@ async function get_user() {
         }
     })
     .then(respons => {
-        return respons.json()
+        return respons.text()
     })
     .then(data => {
         console.log(data);
