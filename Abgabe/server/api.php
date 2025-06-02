@@ -128,7 +128,8 @@ if ($funktion == "get_notifications") {
 		exit;
 	}
 
-	sql_querry("INSERT INTO zeiterfassung (benutzer_id,aktion,zeitpunkt) values (\"$user_id\",\"Kommen\",\"time()\"");
+	$t = time();
+	sql_querry("INSERT INTO zeiterfassung (benutzer_id,aktion,zeitpunkt) values (\"$user_id\",\"Kommen\",\"$t\"");
 
 	$result = sql_querry("UPDATE user SET status = 1 WHERE id = \"$user_id\"");
 	respond_json([
@@ -146,7 +147,8 @@ if ($funktion == "get_notifications") {
 		exit;
 	}
 
-	sql_querry("INSERT INTO zeiterfassung (benutzer_id,aktion,zeitpunkt) values (\"$user_id\",\"Gehen\",\"time()\"");
+	$t = time();
+	sql_querry("INSERT INTO zeiterfassung (benutzer_id,aktion,zeitpunkt) values (\"$user_id\",\"Gehen\",\"$t\"");
 
 	$result = sql_querry("UPDATE user SET status = 0 WHERE id = \"$user_id\"");
 	respond_json([
