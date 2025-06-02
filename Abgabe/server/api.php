@@ -118,6 +118,14 @@ if ($funktion == "get_notifications") {
 }elseif ($funktion == "user_kommen") {
 	$user_id = $data["user_id"] ?? null;
 
+	$result = sql_querry("SELECT status FROM user WHERE id = \"$user_id\"");
+	if ($result["status"] == 1){
+		respond_json([
+			"error" => "users allready logged in"
+		]);
+		exit;
+	}
+
 	$result = sql_querry("UPDATE user SET status = 1 WHERE id = \"$user_id\"");
 	respond_json([
 		"respons" => $response
@@ -125,6 +133,15 @@ if ($funktion == "get_notifications") {
 
 }elseif ($funktion == "user_gehen") {
 	$user_id = $data["user_id"] ?? null;
+
+	$result = sql_querry("SELECT status FROM user WHERE id = \"$user_id\"");
+	if ($result["status"] == 0){
+		respond_json([
+			"error" => "users allready gone in"
+		]);
+		exit;
+	}
+
 	$result = sql_querry("UPDATE user SET status = 0 WHERE id = \"$user_id\"");
 	respond_json([
 		"respons" => $response
