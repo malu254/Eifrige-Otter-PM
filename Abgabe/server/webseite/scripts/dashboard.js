@@ -12,10 +12,11 @@ async function get_user() {
         })
     })
     .then(respons => {
-        return respons.text()
+        if (!respons.ok) throw new Error("respons error")
+        return respons.json()
     })
     .then(data => {
-        console.log(data);
+        user = data
     })
 }
 
@@ -42,3 +43,4 @@ function button_gehen_even() {
 document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
 
 get_user()
+console.log(user);
