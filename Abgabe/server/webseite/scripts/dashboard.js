@@ -13,7 +13,7 @@ async function get_user() {
     })
 
     if (!respons.ok) throw new Error("respons error")
-    user = await respons.json()
+    user = await respons.json().user
 }
 
 function button_kommen_even() {
@@ -26,7 +26,8 @@ function button_kommen_even() {
             "Content-Type":"application/json"
         },
         body:JSON.stringify({
-            "function":"user_kommen"
+            "function":"user_kommen",
+            "user_id":user.id
         })
     })
 }
@@ -39,7 +40,3 @@ function button_gehen_even() {
 document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
 
 get_user()
-.then(() => {
-    console.log(user);
-    
-})
