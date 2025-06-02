@@ -85,13 +85,13 @@ function get_times() {
             "function":"get_times",
             "user_id":user.id
         })
-        .then(respons => {
-            if (!respons.ok) throw new Error("respons error")
-            return respons.json()
-        })
-        .then(data => {
-            console.log(data);
-            
-        })
+    })
+    .then(respons => {
+        if (!respons.ok) throw new Error("respons error")
+        return respons.json()
+    })
+    .then(data => {
+        console.log(data);
+        
     })
 }
