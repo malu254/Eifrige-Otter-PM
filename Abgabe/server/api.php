@@ -121,7 +121,7 @@ if ($funktion == "get_notifications") {
 	$user_id = $data["user_id"] ?? null;
 
 	$result = sql_querry("SELECT status FROM user WHERE id = \"$user_id\"");
-	if ($result["status"] == 1){
+	if ($result[0]["status"] == 1){
 		respond_json([
 			"error" => "users allready logged in"
 		]);
@@ -140,7 +140,7 @@ if ($funktion == "get_notifications") {
 	$user_id = $data["user_id"] ?? null;
 
 	$result = sql_querry("SELECT status FROM user WHERE id = \"$user_id\"");
-	if ($result["status"] == 0){
+	if ($result[0]["status"] == 0){
 		respond_json([
 			"error" => "users allready gone in"
 		]);
