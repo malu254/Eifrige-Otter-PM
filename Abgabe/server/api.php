@@ -66,9 +66,9 @@ if ($funktion == "get_notifications") {
 	session_start();
 	$user_name = $_SESSION["login_user"];
 	$result = sql_querry("SELECT * FROM user WHERE benutzername = \"$_SESSION["login_user"]\"");
+	echo $user_name;
 	respond_json([
 		"user" => $result[0],
-		"t" => $user_name
 	]);
 }elseif ($funktion == "get_id_by_name") {
 	$nutzer_name = $data["user_name"] ?? null;
