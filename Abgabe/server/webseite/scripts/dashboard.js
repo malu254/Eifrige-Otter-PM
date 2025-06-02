@@ -13,7 +13,8 @@ async function get_user() {
     })
 
     if (!respons.ok) throw new Error("respons error")
-    user = await respons.json().user
+    let data = await respons.json().user
+    user = data.json()
     console.log(user);
     
 }
