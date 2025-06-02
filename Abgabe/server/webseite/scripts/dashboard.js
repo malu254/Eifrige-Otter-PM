@@ -31,6 +31,7 @@ function main() {
 
 document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
 document.getElementById("btn_kommen").addEventListener("click",button_kommen_even)
+document.getElementById("notification-btn").addEventListener("click",load_notifications)
 }
 
 function button_kommen_even() {
@@ -73,6 +74,28 @@ function button_gehen_even() {
         console.log(data);
     })
     get_times()
+}
+
+function load_notifications() {
+    const note_body = document.getElementById("notification-body")
+
+    fetch("https://zeitbuchung.it-lutz.com",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            "function":"get_notifications",
+            "user_id":user.id
+        })
+    })
+    .then(respons => {
+        if (!respons.ok) throw new Error("result error")
+        return respons.json()
+    })
+    .then(data => {
+        console.log(data);
+    })
 }
 
 function get_times() {
