@@ -51,6 +51,7 @@ function button_kommen_even() {
     .then(data => {
         console.log(data);
     })
+    get_times()
 }
 
 function button_gehen_even() {
@@ -70,5 +71,27 @@ function button_gehen_even() {
     })
     .then(data => {
         console.log(data);
+    })
+    get_times()
+}
+
+function get_times() {
+    fetch("https://zeitbuchung.it-lutz.com/api.php",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify({
+            "function":"get_times",
+            "user_id":user.id
+        })
+        .then(respons => {
+            if (!respons.ok) throw new Error("respons error")
+            return respons.json()
+        })
+        .then(data => {
+            console.log(data);
+            
+        })
     })
 }
