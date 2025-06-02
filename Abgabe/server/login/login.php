@@ -50,6 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             $basisURL = $_SERVER['SERVER_NAME'] . "/";
             $weiterleitung = "http://$basisURL$empfangeneDaten"; // Leitet den Benutzer zu der angegebenen URL weiter
 
+            if ($row["ersterLogin"] == "1")
+            {
+
+                header("Location: ./ersterLogin.php?data=$empfangeneDaten"); // Führt die Weiterleitung aus
+                exit(); // Beendet das Skript
+            }
+
             header("Location: $weiterleitung"); // Führt die Weiterleitung aus
             exit(); // Beendet das Skript
         }

@@ -131,7 +131,8 @@
         </div>
       </div>
     </nav>
-    <main class="d-flex flex-grow-1 gap-4" style="overflow: hidden;">
+    <main class="d-flex flex-grow-1">
+
       <div class="w-50 h-100 bg-light d-flex flex-column p-3">
 
         <!-- Wechsel des Aktuellen Zeit Boards(Vor Zurück) -->
@@ -154,7 +155,8 @@
         </div>
 
         <!-- Tabelle Zeiten Board mit Einträgen -->
-        <div class="overflow-auto flex-grow-1 mb-2">
+        <div class="overflow-auto flex-grow-1 mb-2" style="max-height: 80vh;">
+
           <?php
               $heute = isset($_GET['date']) ? $_GET['date'] : date("Y-m-d");
               $timestamp = strtotime($heute);
@@ -216,62 +218,61 @@
               <?php else: ?>
               <tr>
                 <td colspan="3"><em>
-                    <?= $texts['no_entries'] ?? 'Keine Einträge' ?>
+                    <?= $texts['no_entries']?>
                   </em></td>
               </tr>
               <?php endif; ?>
               <?php endforeach; ?>
             </tbody>
           </table>
-
         </div>
+      </div>
 
-        <!-- Aktionsbuttons -->
-        <div class="flex-grow-1 d-flex justify-content-center align-items-center">
-          <div class="d-grid gap-2" style="width:200px;">
+        <div class="d-flex flex-column justify-content-between p-3" style="height: 100%;">
+  
+          <!-- Informations Anzeige -->
+          <div class="w-100 bg-light d-flex flex-column p-3 text-dark">
+            <div class="mt-5 d-flex flex-column gap-3 fs-5">
+              <p class="mb-0"><strong>
+                  <?= $texts['working_time_target']?>:
+                  <?= htmlspecialchars($userData['sollArbeitszeit'] / 5 ?? '-') ?>
+                  <?= $texts['hours_per_day']?>
+                </strong></p>
+              <p class="mb-0"><strong>
+                  <?= $texts['weekly_hours']?>:
+                  <?= htmlspecialchars($userData['sollArbeitszeit'] ?? '-') ?>
+                </strong></p>
+              <p class="mb-0"><strong>
+                  <?= $texts['worked_hours']?>:
+                </strong></p>
+              <p class="mb-0"><strong>
+                  <?= $texts['flexitime_account']?>:
+                  <?= htmlspecialchars($userData['konto'] ?? '-') ?>
+                </strong></p>
+            </div>
+          </div>
 
+          <!-- Aktionsbuttons (mittig horizontal) -->
+          <div class="d-flex justify-content-center align-items-center mt-3">
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-primary btn-lg" id="btn_kommen">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                <?= $texts['coming']?>
+              </button>
 
-            <button type="button" class="btn btn-primary btn-lg w-100" id="btn_kommen">
-              <i class="bi bi-box-arrow-in-right me-2"></i>
-              <?= $texts['coming']?>
-            </button>
+              <button type="button" class="btn btn-primary btn-lg" id="btn_gehen">
+                <i class="bi bi-box-arrow-right me-2"></i>
+                <?= $texts['going']?>
+              </button>
 
-            <button type="button" class="btn btn-primary btn-lg w-100" id="btn_gehen">
-              <i class="bi bi-box-arrow-right me-2"></i>
-              <?= $texts['going']?>
-            </button>
-
-            <button onclick="post('index.php', 'aktion', 'Frei')" type="button" class="btn btn-primary btn-lg w-100">
-              <i class="bi bi-clock-history me-2"></i>
-              <?= $texts['holiday']?>
-            </button>
+              <button onclick="post('index.php', 'aktion', 'Frei')" type="button" class="btn btn-primary btn-lg">
+                <i class="bi bi-clock-history me-2"></i>
+                <?= $texts['holiday']?>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Informations Anzeige -->
-      <div class="w-50 h-100 bg-light d-flex flex-column p-3 text-dark">
-        <div class="mt-5 d-flex flex-column gap-3 fs-5">
-          <p class="mb-0"><strong>
-              <?= $texts['working_time_target']?>:
-              <?= htmlspecialchars($userData['sollArbeitszeit'] / 5 ?? '-') ?>
-              <?= $texts['hours_per_day']?>
-            </strong></p>
-          <p class="mb-0"><strong>
-              <?= $texts['weekly_hours']?>:
-              <?= htmlspecialchars($userData['sollArbeitszeit'] ?? '-') ?>
-            </strong></p>
-          <p class="mb-0"><strong>
-              <?= $texts['worked_hours']?>:
-            </strong></p>
-          <p class="mb-0"><strong>
-              <?= $texts['flexitime_account']?>:
-              <?= htmlspecialchars($userData['konto'] ?? '-') ?>
-            </strong></p>
-        </div>
-      </div>
     </main>
   </div>
 </body>
-
 </html>
