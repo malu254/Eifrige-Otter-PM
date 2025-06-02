@@ -6,9 +6,9 @@ async function get_user() {
         headers:{
             "Content-Type":"application/json"
         },
-        body:{
+        body:JSON.stringify({
             "function":"get_current_user"
-        }
+        })
     })
     .then(respons => {
         return respons.text()
