@@ -2,7 +2,7 @@ let user
 
 async function get_user() {
   const response = await fetch("https://zeitbuchung.it-lutz.com/api.php",{
-    method:POST,
+    method:"POST",
     headers:{
         "Content-Type":"application/json"
     },
@@ -25,7 +25,7 @@ function button_kommen_even() {
     post('index.php', 'aktion', 'Kommen')
 
     fetch("https://zeitbuchung.it-lutz.com/api.php",{
-        method:POST,
+        method:"POST",
         headers: {
             "Content-Type":"application/json"
         },
@@ -42,3 +42,5 @@ function button_gehen_even() {
     post('index.php', 'aktion', 'Gehen')
 }
 document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
+
+get_user()
