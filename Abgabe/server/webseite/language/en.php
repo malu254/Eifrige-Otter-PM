@@ -56,6 +56,7 @@ return [
   'initialPassword'=> 'Userdefined Password',
   'no_entries'=> 'No Entries',
   'notifications'=> 'Notifications',
+  'password_success'=> 'Password has changes successfully!',
 ];
 
 ?>

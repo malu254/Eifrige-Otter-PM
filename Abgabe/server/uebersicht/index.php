@@ -46,10 +46,28 @@ error_reporting(E_ALL);
     $types = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Sprache
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sprache'])) {
+            $_SESSION['lang'] = $_POST['sprache'];
+
+            $stmt = $conn->prepare("UPDATE user SET lang = ? WHERE benutzername = ?");
+            $stmt->bind_param("ss", $_SESSION['lang'], $benutzername);
+            $stmt->execute();
+        }
+
+        // Neues Passwort
         if (isset($_POST['passwortFormular'])) {
-            $updates[] = "passwort = ?";
-            $params[] = $_POST['passwortFormular'];
-            $types .= 's';
+
+            $stmt = $conn->prepare("UPDATE user SET passwort = ? WHERE benutzername = ?");
+            $stmt->bind_param("ss", $_POST['passwortFormular'], $benutzername);
+            $stmt->execute();
+            $stmt->close();
+            $_SESSION['alert'] = [
+                'type' => 'success',
+                'message' => 'password_success'
+            ];
+            header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
+            exit;
         }
     }
     

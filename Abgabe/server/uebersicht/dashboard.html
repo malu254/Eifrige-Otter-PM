@@ -7,6 +7,7 @@
   <title>
     <?= $texts['timemanagement']?> - BBQ GmbH
   </title>
+  <link rel="icon" href="../webseite/doc/time.png">
 
   <style>
     html,
@@ -107,25 +108,16 @@
                 </ul>
               </li>
 
-              <!--
-              onchange="post('../../uebersicht/index.php', 'sprache', 'en')" 
-              onchange="post('../../uebersicht/index.php', 'sprache', 'de')"
-              -->
               <!-- Sprache wechseln -->
               <li class="nav-item">
                 <div class="form-check form-switch">
                   <?php if ($_SESSION['lang'] == 'de'): ?>
-                  <input  id="langEn" class="form-check-input"
-                    type="checkbox" value="" switch>
-                  <label class="form-check-label" for="checkNativeSwitch">
-                    Change to English
-                  </label>
+                  <input  id="langEn" class="form-check-input" type="checkbox" value="" onchange="post('../../uebersicht/index.php', 'sprache', 'en')" switch>
+                  <label class="form-check-label" for="checkNativeSwitch">Change to English</label>
+
                   <?php else: ?>
-                  <input  id="langDe" class="form-check-input"
-                    type="checkbox" value="" switch checked>
-                  <label class="form-check-label" for="checkNativeSwitch">
-                    Wechsel zu Deutsch
-                  </label>
+                  <input  id="langDe" class="form-check-input" type="checkbox" value="" onchange="post('../../uebersicht/index.php', 'sprache', 'de')" switch checked>
+                  <label class="form-check-label" for="checkNativeSwitch">Wechsel zu Deutsch</label>
                   <?php endif; ?>
                 </div>
               </li>
@@ -251,6 +243,7 @@
               <p class="mb-0"><strong>
                   <?= $texts['flexitime_account']?>:
                   <?= htmlspecialchars($userData['konto'] ?? '-') ?>
+                  <?= $texts['hours']?>
                 </strong></p>
             </div>
           </div>
@@ -273,6 +266,16 @@
     </main>
   </div>
 </body>
+<?php if (isset($_SESSION['alert'])): ?>
+  <div id="page-alert" class="position-fixed top-0 start-50 translate-middle-x mt-4 z-1050" style="max-width: 600px; width: 90%;">
+    <div class="alert alert-<?= $_SESSION['alert']['type'] ?> alert-dismissible fade show shadow-lg" role="alert">
+      <?= $texts[$_SESSION['alert']['message']] ?>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  </div>
+  <?php unset($_SESSION['alert']); ?>
+<?php endif; ?>
+
     <script src="/webseite/scripts/dashboard.js" defer></script>
     <script src="/webseite/scripts/script.js" defer></script>
     </html>

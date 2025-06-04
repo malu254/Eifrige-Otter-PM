@@ -56,6 +56,7 @@ return [
   'initialPassword'=> 'Benutzerdefiniertes Passwort setzen',
   'no_entries'=> 'Keine Einträge',
   'notifications'=> 'Benachrichtigungen',
+  'password_success'=> 'Passwort wurde erfolgreich geändert!',
 ];
 
 ?>
