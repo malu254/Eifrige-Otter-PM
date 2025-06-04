@@ -1,4 +1,4 @@
-const url = "http://localhost/api.php"
+const url = "https://zeitbuchung.it-lutz.com/api.php"
 let user
 
 async function get_user() {
