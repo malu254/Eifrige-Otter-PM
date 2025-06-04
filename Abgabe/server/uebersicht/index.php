@@ -4,6 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
     session_start();
 
     if (!isset($_SESSION['login_user'])) {
@@ -45,64 +46,12 @@ error_reporting(E_ALL);
     $types = '';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        if (isset($_POST['sprache'])) {
-            $updates[] = "lang = ?";
-            $params[] = $_POST['sprache'];
-            $types .= 's';
-            $_SESSION['lang'] = $_POST['sprache'];
-        }
-
         if (isset($_POST['passwortFormular'])) {
             $updates[] = "passwort = ?";
             $params[] = $_POST['passwortFormular'];
             $types .= 's';
         }
-
-        if (isset($_POST['aktion']) && in_array($_POST['aktion'], ['Kommen', 'Gehen', 'Frei'])) {
-            $aktion = $_POST['aktion'];
-            $stmt = $conn->prepare("INSERT INTO zeiterfassung (benutzer_id, aktion) VALUES (?, ?)");
-            $stmt->bind_param("is", $benutzer_id, $aktion);
-            $stmt->execute();
-            $stmt->close();
-
-            $status = ($aktion == 'Kommen') ? 'Anwesend' : 'Abwesend';
-            $updates[] = "status = ?";
-            $params[] = $status;
-            $types .= 's';
-        }
-        
-        // Nur wenn es Änderungen gibt
-        if (!empty($updates)) {
-            $query = "UPDATE user SET " . implode(', ', $updates) . " WHERE benutzername = ?";
-            $params[] = $benutzername;
-            $types .= 's';
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param($types, ...$params);
-            $stmt->execute();
-            $stmt->close();
-        }
     }
-
-
-/*
-    // Nachrichten
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['get-notification'])) {
-        header('Content-Type: application/json');
-        $nachrichten = [];
-
-        $stmt = $conn->prepare("SELECT * FROM notification WHERE benutzer_id = ?");
-        $stmt->bind_param("i", $benutzer_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        while ($row = $result->fetch_assoc()) {
-            $nachrichten[] = $row;
-        }
-        $stmt->close();
-        echo json_encode($nachrichten);
-        exit(); // Ganz wichtig!
-    }
-        */
-
     
     // Einträge für Zeitmanagement Tabelle holen
     $eintraege = [];

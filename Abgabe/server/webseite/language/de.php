@@ -55,6 +55,7 @@ return [
   'Friday'=> 'Freitag',
   'initialPassword'=> 'Benutzerdefiniertes Passwort setzen',
   'no_entries'=> 'Keine Einträge',
+  'notifications'=> 'Benachrichtigungen',
 ];
 
 ?>

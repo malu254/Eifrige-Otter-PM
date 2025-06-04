@@ -42,34 +42,4 @@ document.addEventListener("DOMContentLoaded", function() {
       getnotification('load');
     });
   }
-
-  // Funktion zum Abrufen der Benachrichtigungen
-  function getnotification(action) {
-    console.log("Lade Benachrichtigungen...");
-
-    fetch('index.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'get-notification=' + encodeURIComponent(action)
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Netzwerkfehler beim Abrufen der Benachrichtigungen');
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data); // Zum Debuggen
-      const notificationBody = document.getElementById("notification-body");
-      notificationBody.innerHTML = ""; // Optional: vorher leeren
-      data.forEach(entry => {
-        notificationBody.innerHTML += `<p>${entry.text}</p>`;
-      });
-    })
-    .catch(error => {
-      console.error("Fehler beim Laden der Benachrichtigungen:", error);
-    });
-  }
 });

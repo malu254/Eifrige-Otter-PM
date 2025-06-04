@@ -47,8 +47,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             mysqli_query($conn, $update_sql);
             
             // Basis-URL wird auf die aktuelle Server-Adresse gesetzt
-            $basisURL = $_SERVER['SERVER_NAME'] . "/";
-            $weiterleitung = "http://$basisURL$empfangeneDaten"; // Leitet den Benutzer zu der angegebenen URL weiter
+            $basisURL = $_SERVER['SERVER_NAME'];
+            $weiterleitung = "http://$basisURL/$empfangeneDaten"; // Leitet den Benutzer zu der angegebenen URL weiter
+
+            if($benutzername == 'admin')
+            {
+                header("Location: http://$basisURL/leitung"); // Führt die Weiterleitung aus
+                exit(); // Beendet das Skript
+            }
 
             if ($row["ersterLogin"] == "1")
             {

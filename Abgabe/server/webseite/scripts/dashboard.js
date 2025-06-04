@@ -1,4 +1,4 @@
-const url = "https://zeitbuchung.it-lutz.com/api.php"
+const url = "http://localhost/api.php"
 let user
 
 async function get_user() {
@@ -33,7 +33,24 @@ function main() {
 document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
 document.getElementById("btn_kommen").addEventListener("click",button_kommen_even)
 document.getElementById("notification-btn").addEventListener("click",load_notifications)
+
+document.getElementById("submitNewPassword").addEventListener("submit", function(e) {
+    e.preventDefault(); // verhindert das Absenden des Formulars
+    alert("Das ist ein Test"); // zeigt die Alertbox an
+});
+
+const langEn = document.getElementById("langEn");
+if (langEn) {
+    langEn.addEventListener("click", () => language_change("en"));
 }
+
+const langDe = document.getElementById("langDe");
+if (langDe) {
+    langDe.addEventListener("click", () => language_change("de"));
+}
+}
+
+
 
 function button_kommen_even() {
     fetch(url,{
@@ -121,6 +138,30 @@ function get_times() {
     })
     .then(data => {
         console.log(data);
-        
+        location.reload(); // quickfix
     })
+}
+
+function language_change(lang) {
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "function": "change_lang",
+            "user_id": user.id,
+            "lang": lang
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("failed to load language");
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        setTimeout(() => {
+            location.reload();
+        }); 
+    });
 }

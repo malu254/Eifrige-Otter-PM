@@ -159,6 +159,8 @@ if ($funktion == "get_notifications") {
 	$user_id = $data["user_id"] ?? null;
 	$lang    = $data["lang"]    ?? null;
 
+	$_SESSION['lang'] = $lang;
+	
 	$result = sql_querry("UPDATE user SET lang = \"$lang\" WHERE id = \"$user_id\"");
 	respond_json([
 		"respons" => $result
