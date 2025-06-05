@@ -131,6 +131,21 @@ function load_notifications() {
     })
 }
 
+function password_alert(message,type) {
+    const alertPlaceholder = document.getElementById("alert-placeholder")
+    const appendAlert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            `   <div>${message}</div>`,
+            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+        ].join('')
+
+        alertPlaceholder.append(wrapper)
+    }
+    appendAlert(message,type)
+}
 
 function get_times() {
     fetch(url,{
