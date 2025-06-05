@@ -57,6 +57,9 @@ return [
   'no_entries'=> 'Keine Einträge',
   'notifications'=> 'Benachrichtigungen',
   'password_success'=> 'Passwort wurde erfolgreich geändert!',
+  'yes'=> 'Ja',
+  'no'=>  'Nein',
+  'user_exists'=> 'Benutzer existiert bereits',
 ];
 
 ?>

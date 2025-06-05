@@ -112,11 +112,11 @@
               <li class="nav-item">
                 <div class="form-check form-switch">
                   <?php if ($_SESSION['lang'] == 'de'): ?>
-                  <input  id="langEn" class="form-check-input" type="checkbox" value="" onchange="post('../../uebersicht/index.php', 'sprache', 'en')" switch>
+                  <input  id="langEn" class="form-check-input" type="checkbox" value="" onchange="post('../uebersicht/index.php', 'sprache', 'en')" switch>
                   <label class="form-check-label" for="checkNativeSwitch">Change to English</label>
 
                   <?php else: ?>
-                  <input  id="langDe" class="form-check-input" type="checkbox" value="" onchange="post('../../uebersicht/index.php', 'sprache', 'de')" switch checked>
+                  <input  id="langDe" class="form-check-input" type="checkbox" value="" onchange="post('../uebersicht/index.php', 'sprache', 'de')" switch checked>
                   <label class="form-check-label" for="checkNativeSwitch">Wechsel zu Deutsch</label>
                   <?php endif; ?>
                 </div>
@@ -136,10 +136,8 @@
               <th><?= $texts['username']?></th>
               <th><?= $texts['status']?></th>
               <th><?= $texts['working_time_target']?></th>
-              <th><?= $texts['weekly_hours']?></th>
-              <th><?= $texts['absence']?></th>
-              <th><?= $texts['language']?></th>
               <th><?= $texts['underage']?></th>
+              <th><?= $texts['language']?></th>
               <th><?= $texts['remove']?></th>
             </tr>
           </thead>
@@ -149,10 +147,8 @@
               <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
               <td><?= htmlspecialchars($texts[$eintrag['status']] ?? '-') ?></td>
               <td><?= htmlspecialchars(($eintrag['sollArbeitszeit'] ?? null) !== null ? $eintrag['sollArbeitszeit'] . ($texts['hours'] ?? '') : '-') ?></td>
-              <td><?= htmlspecialchars($eintrag['stundenwoche'] ?? '-') ?></td>
-              <td><?= htmlspecialchars($eintrag['fehlzeit'] ?? '-') ?></td>
-              <td><?= htmlspecialchars($eintrag['lang'] ?? '-') ?></td>
-              <td><?= htmlspecialchars($eintrag['geburtstag'] ?? '-') ?></td>
+              <td><?= htmlspecialchars((new DateTime($eintrag['geburtstag']))->diff(new DateTime())->y < 18 ? $texts['yes'] : $texts['no']) ?></td>
+              <td></td>
               <td>
                 <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
                 <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_delete_user'])) ?>');">
@@ -173,7 +169,7 @@
                   <input type="text" maxlength="35" name="benutzernameEingabe" class="form-control form-control-sm" placeholder="<?= $texts['username']?>" required>
                 </td>
                 <td>
-                  <input type="password" maxlength="35" name="passwortEingabe" class="form-control form-control-sm" placeholder="<?= $texts['temporary_password']?>" required>
+                  <input type="password" minlength="4" maxlength="35" name="passwortEingabe" class="form-control form-control-sm" placeholder="<?= $texts['temporary_password']?>" required>
                 </td>
                 <td>
                   <select name="sollArbeitszeitEingabe" class="form-select form-select-sm">
@@ -183,15 +179,15 @@
                   </select>
                 </td>
                 <td>
-                  <input type="date" name="gebEingabe" class="form-control form-control-sm" required>
+                  <input type="date" name="gebEingabe" class="form-control form-control-sm" id="gebEingabe" required>
                 </td>
-                <td colspan="2">
+                <td colspan="1">
                   <select name="language" class="form-select form-select-sm">
                     <option value="de"><?= $texts['german']?></option>
                     <option value="en"><?= $texts['english']?></option>
                   </select>
                 </td>
-                <td colspan="2">
+                <td colspan="1">
                   <button type="submit" name="benutzerHinzufuegen" class="btn btn-sm btn-success w-100"><?= $texts['add_user']?></button>
                 </td>
               </form>
@@ -211,5 +207,15 @@
   </div>
   <?php unset($_SESSION['alert']); ?>
 <?php endif; ?>
+<script>
+  const dateInput = document.getElementById("gebEingabe");
 
+    // Berechne das heutige Datum minus 13 Jahre
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 13, today.getMonth(), today.getDate());
+    const maxDateString = maxDate.toISOString().split('T')[0];
+
+    // Setze das max-Attribut des Eingabefelds
+    dateInput.max = maxDateString;
+</script>
 </html>

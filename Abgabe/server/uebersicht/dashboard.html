@@ -98,12 +98,10 @@
                   <?= $texts['change_password']?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark p-3">
-                  <form id="newPassword" method="post">
-                    <input type="password" name="passwortFormular" class="form-control mb-2"
-                      placeholder="<?= $texts['new_password']?>" required>
-                    <input type="submit" name="submit" value="Ok" id="submitNewPassword"
+                    <input minlength="4" maxlength="35" type="password" name="passwortFormular" class="form-control mb-2" id="newPasswordInput"
+                      placeholder="<?= $texts['new_password']?>">
+                    <input type="button" value="Ok" id="submitNewPassword"
                       class="btn btn-primary btn-sm w-100">
-                  </form>
                   <div id="message" class="mt-2"></div>
                 </ul>
               </li>
