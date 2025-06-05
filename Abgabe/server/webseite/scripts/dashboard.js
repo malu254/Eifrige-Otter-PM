@@ -33,6 +33,7 @@ function main() {
 document.getElementById("btn_gehen").addEventListener("click",button_gehen_even)
 document.getElementById("btn_kommen").addEventListener("click",button_kommen_even)
 document.getElementById("notification-btn").addEventListener("click",load_notifications)
+document.getElementById("submitNewPassword").addEventListener("click",button_new_password)
 
 
 }
@@ -79,6 +80,27 @@ function button_gehen_even() {
         console.log(data);
     })
     get_times()
+}
+
+function button_new_password() {
+    const pw_input = document.getElementById("newPasswordInput")
+    const new_pw = pw_input.value
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            "function":"change_password",
+            "user_id":user.id,
+            "new_password":new_pw
+        })
+    })
+    .then(result => {
+        if (!result.ok) throw new Error("result Error")
+        return result.json()
+    })
+    .then(data => {console.log(data);})
 }
 
 function load_notifications() {
@@ -129,4 +151,5 @@ function get_times() {
         location.reload();
     })
 }
+
 
