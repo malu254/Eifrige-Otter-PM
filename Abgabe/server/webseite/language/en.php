@@ -57,6 +57,9 @@ return [
   'no_entries'=> 'No Entries',
   'notifications'=> 'Notifications',
   'password_success'=> 'Password has changes successfully!',
+  'yes'=> 'Yes',
+  'no'=>  'No',
+  'user_exists'=> 'User already exists',
 ];
 
 ?>

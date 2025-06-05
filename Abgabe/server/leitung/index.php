@@ -58,6 +58,8 @@ error_reporting(E_ALL);
             $stmt->bind_param("s", $benutzername_loeschen);
             $stmt->execute();
             $stmt->close();
+            header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
+            exit;
         }
     }
 
@@ -86,10 +88,17 @@ error_reporting(E_ALL);
                     $stmt->bind_param("sssssi", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $sprache, $ersterLogin);
                     $stmt->execute();
                     $stmt->close();
-                } else {
-                    $stmt->close();
-                    // Benutzer existiert bereits – hier könntest du eine Nachricht anzeigen
-                }
+                    header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
+                    exit;
+                } 
+                else {
+                $stmt->close();
+                header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
+                $_SESSION['alert']['type'] = 'warning'; // or 'danger', depending on your UI
+                $_SESSION['alert']['message'] = 'user_exists';
+                exit;
+            }
+
             }
         }
 
@@ -115,6 +124,7 @@ error_reporting(E_ALL);
     }
     $stmt->close();
 
+    
 
     // Sprache aus Datenbank laden
     $stmt = $conn->prepare("SELECT lang FROM user WHERE benutzername = ?");

@@ -21,7 +21,7 @@
                 <h2 id="logo">
                     <!-- <?php echo $loginSeite; ?> -->  <?= $texts['initialPassword']?>
                 </h2>
-                <input type="password" name="passwortFormular" placeholder="<?= $texts['password']?>" id="passwort">
+                <input minlength="4" maxlength="35" type="password" name="passwortFormular" placeholder="<?= $texts['password']?>" id="passwort">
                 <input onclick="" type="submit" name="submit" value="<?= $texts['submitLogin']?>" id="submit_button">
                 <div style="font-size:11px; color:#cc0000; margin-top:10px">
                     <?php echo isset($error) ? htmlspecialchars($error) : ''; ?>
