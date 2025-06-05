@@ -99,14 +99,14 @@ function button_new_password() {
         .then(result => {
             if (!result.ok) throw new Error("result Error")
             pw_input.value = ""
-        password_allert("test","success")
+        password_alert("test","success")
             return result.json()
         })
         .then(data => { console.log(data); })
 }
 
 function password_alert(message,type) {
-    const alertPlaceholder = document.getElementById("alter-placeholder")
+    const alertPlaceholder = document.getElementById("alert-placeholder")
     const appendAlert = (message, type) => {
         const wrapper = document.createElement('div')
         wrapper.innerHTML = [
