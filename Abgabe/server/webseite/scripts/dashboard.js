@@ -98,6 +98,7 @@ function button_new_password() {
     })
     .then(result => {
         if (!result.ok) throw new Error("result Error")
+        pw_input.value = ""
         return result.json()
     })
     .then(data => {console.log(data);})
