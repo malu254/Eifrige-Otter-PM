@@ -115,7 +115,7 @@ function password_alert(message,type) {
         const wrapper = document.createElement('div')
         wrapper.innerHTML = [
             `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-            `   <div>${message}</div>`,
+            `   <div><?= $texts['${message}']?></div>`,
             '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
             '</div>'
         ].join('')
@@ -173,3 +173,4 @@ function get_times() {
             location.reload();
         })
 }
+
