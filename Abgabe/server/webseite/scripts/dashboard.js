@@ -34,8 +34,6 @@ function main() {
     document.getElementById("btn_kommen").addEventListener("click", button_kommen_even)
     document.getElementById("notification-btn").addEventListener("click", load_notifications)
     document.getElementById("submitNewPassword").addEventListener("click", button_new_password)
-
-
 }
 
 
@@ -85,6 +83,12 @@ function button_gehen_even() {
 function button_new_password() {
     const pw_input = document.getElementById("newPasswordInput")
     const new_pw = pw_input.value
+
+    if (new_pw.length < 4 || new_pw.length > 35) {
+        password_alert("Passwort muss zwischen 4 und 35 Zeichen lang sein.", "danger")
+        return
+    }
+
     fetch(url, {
         method: "POST",
         headers: {
@@ -99,7 +103,7 @@ function button_new_password() {
         .then(result => {
             if (!result.ok) throw new Error("result Error")
             pw_input.value = ""
-        password_alert("test","success")
+        password_alert("password_success","success")
             return result.json()
         })
         .then(data => { console.log(data); })

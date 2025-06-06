@@ -124,6 +124,9 @@
         </div>
       </div>
     </nav>
+
+    <div id="alert-placeholder"></div>
+
     <main class="d-flex flex-grow-1">
 
       <div class="w-50 h-100 bg-light d-flex flex-column p-3">
@@ -264,16 +267,6 @@
     </main>
   </div>
 </body>
-<?php if (isset($_SESSION['alert'])): ?>
-  <div id="page-alert" class="position-fixed top-0 start-50 translate-middle-x mt-4 z-1050" style="max-width: 600px; width: 90%;">
-    <div class="alert alert-<?= $_SESSION['alert']['type'] ?> alert-dismissible fade show shadow-lg" role="alert">
-      <?= $texts[$_SESSION['alert']['message']] ?>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  </div>
-  <?php unset($_SESSION['alert']); ?>
-<?php endif; ?>
-
-    <script src="/webseite/scripts/dashboard.js" defer></script>
-    <script src="/webseite/scripts/script.js" defer></script>
-    </html>
+<script src="/webseite/scripts/dashboard.js" defer></script>
+<script src="/webseite/scripts/script.js" defer></script>
+</html>

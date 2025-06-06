@@ -98,12 +98,10 @@
                   <?= $texts['change_password']?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark p-3">
-                  <form id="newPassword" method="post">
-                    <input type="password" name="passwortFormular" class="form-control mb-2"
-                      placeholder="<?= $texts['new_password']?>" required>
-                    <input type="submit" name="submit" value="Ok" id="submitNewPassword"
-                      class="btn btn-primary btn-sm w-100">
-                  </form>
+                    <input minlength="4" maxlength="35" type="password" name="passwortFormular" class="form-control mb-2" id="newPasswordInput"
+                      placeholder="<?= $texts['new_password']?>">
+                    <input type="button" value="Ok" id="submitNewPassword"
+                      class="btn btn-primary btn-sm w-100" onclick="button_new_password()">
                   <div id="message" class="mt-2"></div>
                 </ul>
               </li>
@@ -112,11 +110,11 @@
               <li class="nav-item">
                 <div class="form-check form-switch">
                   <?php if ($_SESSION['lang'] == 'de'): ?>
-                  <input  id="langEn" class="form-check-input" type="checkbox" value="" onchange="post('../uebersicht/index.php', 'sprache', 'en')" switch>
+                  <input  id="langEn" class="form-check-input" type="checkbox" value="" onchange="post('../../uebersicht/index.php', 'sprache', 'en')" switch>
                   <label class="form-check-label" for="checkNativeSwitch">Change to English</label>
 
                   <?php else: ?>
-                  <input  id="langDe" class="form-check-input" type="checkbox" value="" onchange="post('../uebersicht/index.php', 'sprache', 'de')" switch checked>
+                  <input  id="langDe" class="form-check-input" type="checkbox" value="" onchange="post('../../uebersicht/index.php', 'sprache', 'de')" switch checked>
                   <label class="form-check-label" for="checkNativeSwitch">Wechsel zu Deutsch</label>
                   <?php endif; ?>
                 </div>
@@ -126,6 +124,8 @@
         </div>
       </div>
     </nav>
+    
+    <div id="alert-placeholder"></div>
     
     <main class="d-flex flex-grow-1 gap-4">
     <div class="col-12 bg-light d-flex flex-column p-3">
@@ -218,4 +218,6 @@
     // Setze das max-Attribut des Eingabefelds
     dateInput.max = maxDateString;
 </script>
+<script src="/webseite/scripts/dashboard.js" defer></script>
+<script src="/webseite/scripts/script.js" defer></script>
 </html>
