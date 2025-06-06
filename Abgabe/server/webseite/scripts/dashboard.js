@@ -85,7 +85,7 @@ function button_new_password() {
     const new_pw = pw_input.value
 
     if (new_pw.length < 4 || new_pw.length > 35) {
-        password_alert("Passwort muss zwischen 4 und 35 Zeichen lang sein.", "danger")
+        password_alert("password_error", "danger")
         return
     }
 
@@ -109,20 +109,24 @@ function button_new_password() {
         .then(data => { console.log(data); })
 }
 
-function password_alert(message,type) {
-    const alertPlaceholder = document.getElementById("alert-placeholder")
+function password_alert(message, type) {
+    const alertPlaceholder = document.getElementById("alert-placeholder");
+
     const appendAlert = (message, type) => {
-        const wrapper = document.createElement('div')
+        const wrapper = document.createElement('div');
+        const translatedMessage = translations[message] || message;
+
         wrapper.innerHTML = [
             `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-            `   <div><?= $texts['${message}']?></div>`,
+            `   <div>${translatedMessage}</div>`,
             '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
             '</div>'
-        ].join('')
+        ].join('');
 
-        alertPlaceholder.append(wrapper)
+        alertPlaceholder.append(wrapper);
     }
-    appendAlert(message,type)
+
+    appendAlert(message, type);
 }
 
 function load_notifications() {

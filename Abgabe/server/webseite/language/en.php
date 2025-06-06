@@ -57,6 +57,7 @@ return [
   'no_entries'=> 'No Entries',
   'notifications'=> 'Notifications',
   'password_success'=> 'Password has changes successfully!',
+  'password_error'=>'Password has to be between 4 and 35 characters.',
   'yes'=> 'Yes',
   'no'=>  'No',
   'user_exists'=> 'User already exists',

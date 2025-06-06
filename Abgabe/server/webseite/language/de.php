@@ -57,6 +57,7 @@ return [
   'no_entries'=> 'Keine Einträge',
   'notifications'=> 'Benachrichtigungen',
   'password_success'=> 'Passwort wurde erfolgreich geändert!',
+  'password_error'=>'Passwort muss zwischen 4 und 35 Zeichen lang sein.',
   'yes'=> 'Ja',
   'no'=>  'Nein',
   'user_exists'=> 'Benutzer existiert bereits',
