@@ -168,8 +168,8 @@ function load_notifications() {
 
             const message = document.createElement("div");
             const now = new Date();
-            const timeString = now.toLocaleTimeString(); // z.B. "14:23:05"
-            const translatedText = (translations[notification.text] || notification.text) + timeString;
+            const timeString = now.toLocaleTimeString();
+            const translatedText = (translations[notification.text] || notification.text) + " " timeString;
             message.innerText = translatedText;
 
             const seenButton = document.createElement("button");
