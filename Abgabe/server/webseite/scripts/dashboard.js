@@ -167,7 +167,9 @@ function load_notifications() {
             wrapper.className = "d-flex justify-content-between align-items-center border-bottom py-2";
 
             const message = document.createElement("div");
-            const translatedText = translations[notification.text] || notification.text;
+            const now = new Date();
+            const timeString = now.toLocaleTimeString(); // z.B. "14:23:05"
+            const translatedText = (translations[notification.text] || notification.text) + timeString;
             message.innerText = translatedText;
 
             const seenButton = document.createElement("button");
