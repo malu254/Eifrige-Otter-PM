@@ -109,6 +109,7 @@ function button_new_password() {
         .then(data => { console.log(data); })
 }
 
+
 function password_alert(message, type) {
     const alertPlaceholder = document.getElementById("alert-placeholder");
 
@@ -130,7 +131,13 @@ function password_alert(message, type) {
 }
 
 function load_notifications() {
-    const note_body = document.getElementById("notification-body")
+    const note_body = document.getElementById("notification-body");
+    note_body.innerHTML = ""; // Vorherige Inhalte entfernen
+
+    if (!user?.id) {
+        console.error("Benutzer-ID fehlt – kann keine Benachrichtigungen laden.");
+        return;
+    }
 
     fetch(url, {
         method: "POST",
@@ -142,19 +149,55 @@ function load_notifications() {
             "user_id": user.id
         })
     })
-        .then(respons => {
-            if (!respons.ok) throw new Error("result error")
+    .then(response => {
+        if (!response.ok) throw new Error("result error");
+        return response.json();
+    })
+    .then(data => {
+        console.log("Antwort von get_notifications:", data);
 
-            return respons.json()
-        })
-        .then(data => {
-            data.notifications.forEach(element => {
-                const new_p = document.createElement("p")
-                new_p.innerText = element.text
-                note_body.appendChild(new_p)
-            });
-        })
+        if (!Array.isArray(data.notifications)) {
+            console.warn("Keine gültigen Benachrichtigungen erhalten.");
+            return;
+        }
+
+        data.notifications.forEach(notification => {
+            const wrapper = document.createElement("div");
+            wrapper.className = "d-flex justify-content-between align-items-center border-bottom py-2";
+
+            const message = document.createElement("div");
+            const translatedText = translations[notification.text] || notification.text;
+            message.innerText = translatedText;
+
+            const seenButton = document.createElement("button");
+            seenButton.className = "btn btn-sm btn-outline-secondary";
+            seenButton.title = "Als gesehen markieren";
+
+            const icon = document.createElement("i");
+            icon.className = "bi bi-eye";
+            seenButton.appendChild(icon);
+
+            if (notification.gesehen == 1) {
+                seenButton.disabled = true;
+                wrapper.classList.add("text-muted");
+            } else {
+                seenButton.addEventListener("click", () => {
+                    mark_as_seen(notification.id, wrapper);
+                });
+            }
+
+            wrapper.appendChild(message);
+            wrapper.appendChild(seenButton);
+            note_body.appendChild(wrapper);
+        });
+
+    })
+    .catch(error => {
+        console.error("Fehler beim Laden der Benachrichtigungen:", error);
+    });
 }
+
+
 
 
 function get_times() {
@@ -178,3 +221,31 @@ function get_times() {
         })
 }
 
+
+function mark_as_seen(notificationId, wrapperElement) {
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "function": "mark_as_seen",
+            "notification_id": notificationId
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Antwort auf mark_as_seen:", data);
+
+        if (data.success) {
+            wrapperElement.classList.add("text-muted");
+            const button = wrapperElement.querySelector("button");
+            if (button) button.disabled = true;
+        } else {
+            console.error("Fehler beim Aktualisieren:", data.error);
+        }
+    })
+    .catch(error => {
+        console.error("Fehler bei mark_as_seen:", error);
+    });
+}

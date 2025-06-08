@@ -57,10 +57,21 @@ return [
   'no_entries'=> 'No Entries',
   'notifications'=> 'Notifications',
   'password_success'=> 'Password has changes successfully!',
-  'password_error'=>'Password has to be between 4 and 35 characters.',
   'yes'=> 'Yes',
   'no'=>  'No',
   'user_exists'=> 'User already exists',
+  '001' => 'Warning: You will exceed your permitted working time in 10 minutes',
+  '002' => 'Notice: Your working time is outside the allowed hours of 6 AM to 10 PM!',
+  '003' => 'Violation: Employee under 13 years old!',
+  '004' => 'Violation: As a minor, you have worked more than 8 hours',
+  '005' => 'Violation: As a minor, you worked outside the hours of 6 AM to 8 PM!',
+  '006' => 'Take a break of one hour, you have worked more than 6 hours!',
+  '007' => 'Take a break of half an hour, you have worked more than 4.5 hours',
+  '008' => 'Violation: You have worked more than 10 hours',
+  '009' => 'Notice: You have worked more than 8 hours',
+  '010' => 'Your mandatory break of 45 minutes for working over 9 hours is missing',
+  '011' => 'Your mandatory break of 30 minutes for working over 6 hours is missing',
+
 ];
 
 ?>

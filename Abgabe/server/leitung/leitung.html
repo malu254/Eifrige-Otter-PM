@@ -29,7 +29,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
     crossorigin="anonymous"></script>
-    
   <script>
     const translations = <?= json_encode($texts) ?>;
   </script>
@@ -153,7 +152,7 @@
               <td><?= htmlspecialchars($texts[$eintrag['status']] ?? '-') ?></td>
               <td><?= htmlspecialchars(($eintrag['sollArbeitszeit'] ?? null) !== null ? $eintrag['sollArbeitszeit'] . ($texts['hours'] ?? '') : '-') ?></td>
               <td><?= htmlspecialchars((new DateTime($eintrag['geburtstag']))->diff(new DateTime())->y < 18 ? $texts['yes'] : $texts['no']) ?></td>
-              <td></td>
+              <td><?= htmlspecialchars($eintrag['lang'] ?? '-') ?></td>
               <td>
                 <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
                 <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_delete_user'])) ?>');">

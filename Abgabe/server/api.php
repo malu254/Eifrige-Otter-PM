@@ -54,13 +54,25 @@ if ($data === null) {
 $funktion = $data['function'] ?? null;
 
 if ($funktion == "get_notifications") {
-	$nutzer_id = $data["user_id"] ?? null;
+    $nutzer_id = $data["user_id"] ?? null;
 
-	$nachrichten = sql_querry("SELECT * FROM notification WHERE benutzer_id = $nutzer_id");
+    // du kannst hier optional nach "gesehen = 0" filtern, wenn du nur ungesehene willst
+    $nachrichten = sql_querry("SELECT * FROM notification WHERE benutzer_id = $nutzer_id AND gelesen = 0");
 
-	respond_json([
-		"notifications" => $nachrichten
-	]);
+    respond_json([
+        "notifications" => $nachrichten,
+		"gelesen" => $gelesen
+    ]);
+
+} elseif ($funktion == "mark_as_seen") {
+    $notification_id = $data["notification_id"] ?? null;
+
+    if ($notification_id !== null) {
+        sql_querry("UPDATE notification SET gelesen = 1 WHERE id = $notification_id");
+        respond_json(["success" => true]);
+    } else {
+        respond_json(["success" => false, "error" => "Keine ID"]);
+    }
 
 }elseif ($funktion == "get_current_user") {
 	session_start();

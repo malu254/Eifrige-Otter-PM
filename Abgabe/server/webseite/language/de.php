@@ -57,10 +57,20 @@ return [
   'no_entries'=> 'Keine Einträge',
   'notifications'=> 'Benachrichtigungen',
   'password_success'=> 'Passwort wurde erfolgreich geändert!',
-  'password_error'=>'Passwort muss zwischen 4 und 35 Zeichen lang sein.',
   'yes'=> 'Ja',
   'no'=>  'Nein',
   'user_exists'=> 'Benutzer existiert bereits',
+  '001'=> 'Warnung: In 10 Minuten wird Ihre zulässige Arbeitszeit überschritten',
+  '002'=> 'Hinweis: Ihre Arbeitszeit ist außerhalb von 6–22 Uhr !',
+  '003'=> 'Verstoß: Mitarbeiter unter 13 Jahren !',
+  '004'=> 'Verstoß: Sie haben als Minderjähriger über 8 Stunden gearbeitet',
+  '005'=> 'Verstoß: Sie haben als Minderjähriger außerhalb von 6–20 Uhr gearbeitet !',
+  '006'=> 'Machen Sie eine Pause von einer Stunde, Sie haben mehr als 6 Stunden gearbeitet !',
+  '007'=> 'Machen Sie eine Pause von einer halben Stunde, Sie haben mehr als 4,5 Stunden gearbeitet ',
+  '008'=> 'Verstoß: Sie haben über 10 Stunden gearbeitet',
+  '009'=> 'Hinweis: Sie haben über 8 Stunden gearbeitet',
+  '010'=> 'Ihre Pflichtpause von 45min bei über 9 Stundne Arbeit fehlt',
+  '011'=> 'Ihre Pflichtpause von 30min bei über 6 Stunden Arbeit fehlt',
 ];
 
 ?>

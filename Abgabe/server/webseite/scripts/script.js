@@ -33,13 +33,4 @@ document.addEventListener("DOMContentLoaded", function() {
   datumInput.addEventListener('change', function () {
     form.submit();
   });
-
-  const notificationModal = document.getElementById("exampleModal");
-
-  // Benachrichtigungen laden bei Modal-Öffnung
-  if (notificationModal) {
-    notificationModal.addEventListener("shown.bs.modal", function () {
-      getnotification('load');
-    });
-  }
 });
