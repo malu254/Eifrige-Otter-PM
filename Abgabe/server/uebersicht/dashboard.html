@@ -234,6 +234,9 @@
           <div class="w-100 bg-light d-flex flex-column p-3 text-dark">
             <div class="mt-5 d-flex flex-column gap-3 fs-5">
               <p class="mb-0"><strong>
+                  <?= $texts['status']?>: <?= $texts[$userData['status']] ?>
+                </strong></p>
+              <p class="mb-0"><strong>
                   <?= $texts['working_time_target']?>:
                   <?= htmlspecialchars($userData['sollArbeitszeit'] / 5 ?? '-') ?>
                   <?= $texts['hours_per_day']?>

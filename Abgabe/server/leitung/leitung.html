@@ -147,24 +147,22 @@
           </thead>
           <tbody>
             <?php foreach ($eintraege as $eintrag): ?>
-            <tr>
-              <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
-              <td><?= htmlspecialchars($texts[$eintrag['status']] ?? '-') ?></td>
-              <td><?= htmlspecialchars(($eintrag['sollArbeitszeit'] ?? null) !== null ? $eintrag['sollArbeitszeit'] . ($texts['hours'] ?? '') : '-') ?></td>
-              <td><?= htmlspecialchars((new DateTime($eintrag['geburtstag']))->diff(new DateTime())->y < 18 ? $texts['yes'] : $texts['no']) ?></td>
-              <td><?= htmlspecialchars($eintrag['lang'] ?? '-') ?></td>
-              <td>
-                <?php if ($eintrag['benutzername'] !== $_SESSION['login_user']): ?>
-                <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_delete_user'])) ?>');">
-                  <input type="hidden" name="benutzername_loeschen" value="<?= htmlspecialchars($eintrag['benutzername']) ?>">
-                  <button type="submit" class="btn btn-sm btn-danger"><?= $texts['remove']?></button>
-                </form>
-                <?php else: ?>
-                <span class="text-muted">Admin Account</span>
-                <?php endif; ?>
-              </td>
-            </tr>
+                <?php if ($eintrag['benutzername'] === $_SESSION['login_user']) continue; ?>
+                <tr>
+                  <td><?= htmlspecialchars($eintrag['benutzername'] ?? '-') ?></td>
+                  <td><?= htmlspecialchars($texts[$eintrag['status']] ?? '-') ?></td>
+                  <td><?= htmlspecialchars(($eintrag['sollArbeitszeit'] ?? null) !== null ? $eintrag['sollArbeitszeit'] . ($texts['hours'] ?? '') : '-') ?></td>
+                  <td><?= htmlspecialchars((new DateTime($eintrag['geburtstag']))->diff(new DateTime())->y < 18 ? $texts['yes'] : $texts['no']) ?></td>
+                  <td><?= htmlspecialchars($eintrag['lang'] ?? '-') ?></td>
+                  <td>
+                    <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_delete_user'])) ?>');">
+                      <input type="hidden" name="benutzername_loeschen" value="<?= htmlspecialchars($eintrag['benutzername']) ?>">
+                      <button type="submit" class="btn btn-sm btn-danger"><?= $texts['remove']?></button>
+                    </form>
+                  </td>
+                </tr>
             <?php endforeach; ?>
+
 
             <!-- Neue Benutzer-Zeile -->
             <tr>

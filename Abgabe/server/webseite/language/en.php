@@ -60,6 +60,7 @@ return [
   'yes'=> 'Yes',
   'no'=>  'No',
   'user_exists'=> 'User already exists',
+  '000'=> 'Warning: No complete stamping today',
   '001' => 'Warning: You will exceed your permitted working time in 10 minutes',
   '002' => 'Notice: Your working time is outside the allowed hours of 6 AM to 10 PM!',
   '003' => 'Violation: Employee under 13 years old!',

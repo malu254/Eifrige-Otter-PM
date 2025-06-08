@@ -60,6 +60,7 @@ return [
   'yes'=> 'Ja',
   'no'=>  'Nein',
   'user_exists'=> 'Benutzer existiert bereits',
+  '000'=> 'Warnung: Keine vollständige Stempelung heute',
   '001'=> 'Warnung: In 10 Minuten wird Ihre zulässige Arbeitszeit überschritten',
   '002'=> 'Hinweis: Ihre Arbeitszeit ist außerhalb von 6–22 Uhr !',
   '003'=> 'Verstoß: Mitarbeiter unter 13 Jahren !',

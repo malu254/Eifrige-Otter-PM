@@ -1,4 +1,5 @@
 const url = "https://zeitbuchung.it-lutz.com/api.php"
+//const url = "http://localhost/api.php"
 let user
 
 async function get_user() {
