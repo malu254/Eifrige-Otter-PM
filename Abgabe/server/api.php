@@ -141,11 +141,14 @@ if ($funktion == "get_notifications") {
 	}
 
 	$t = date("Y-m-d H-i-s");
+	$now = new DateTime();
 
 	$result = sql_querry("SELECT zeitpunkt FROM zeiterfassung WHERE benutzer_id = \"$user_id\" ORDER BY zeitpunkt DESC LIMIT 1");
-	$zeit_str = $result[0]["zeitpunkt"];
-	$letzte_zeit = new DateTime($zeit_str);
-	if ($t->diff($letzte_zeit)->h < 11 )
+	$letzte_zeit = new DateTime($result[0]["zeitpunkt"]);
+
+	$interval = $now->getTimestamp() - $letzte_zeit->getTimestamp();
+
+	if ($interval < 11 * 3600)
 	{
 		respond_json([
 			"err" => "time since last gehen too small"
