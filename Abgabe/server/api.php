@@ -153,7 +153,8 @@ if ($funktion == "get_notifications") {
 
 	$result = sql_querry("SELECT geburtstag FROM user WHERE id = \"$user_id\"");
 	$bday = new DateTime($result[0]["geburtstag"]);
-	if ($now->getTimestamp() - $bday->getTimestamp() < 567648000) {
+	//if ($now->getTimestamp() - $bday->getTimestamp() < 567648000) {
+	if (1 == 1){
 		$t = date("H:i");
 		if ($t < "06:00" || $t > "22:00") {
 			respond_json([
