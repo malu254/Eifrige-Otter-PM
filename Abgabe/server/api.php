@@ -147,8 +147,21 @@ if ($funktion == "get_notifications") {
 		exit;
 	}
 
-	$t = date("Y-m-d H-i-s");
 	$now = new DateTime();
+
+	$result = sql_querry("SELECT geburtstag FROM user WHERE id = \"$user_id\"")
+	$bday = new DateTime($result[0]["geburtstag"])
+	if ($now->getTimestamp() - $bday->getTimestamp() < 567648000){
+		$t = date("H:i")
+		if($t < "06:00" ||$t > "22:00") {
+			respond_json([
+				"err" => "a young user cant login before 06:00 or after 22:00"
+			]);
+			exit;
+		}
+	}
+
+	$t = date("Y-m-d H-i-s");
 
 	$result = sql_querry("SELECT zeitpunkt FROM zeiterfassung WHERE benutzer_id = \"$user_id\" and aktion = \"Gehen\" ORDER BY zeitpunkt DESC LIMIT 1");
 	$letzte_zeit = new DateTime($result[0]["zeitpunkt"]);
