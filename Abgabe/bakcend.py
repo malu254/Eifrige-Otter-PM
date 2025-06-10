@@ -75,9 +75,13 @@ def evaluate_current_day(work_day, user,arbeits_zeit):
     arbeits_zeit += delta
     print("--- current day ---")
 
-    if delta.seconds > 21600:
+    if arbeits_zeit.seconds > 32400:
+        print("you need to take another break");
+    elif arbeits_zeit.seconds > 32000:
+        print("you need to take another break soon")
+    elif arbeits_zeit.seconds > 21600:
         print("you need to take a break")
-    elif delta.seconds > 21000:
+    elif arbeits_zeit.seconds > 21000:
         print("you need to take a break soon")
     return arbeits_zeit
 
