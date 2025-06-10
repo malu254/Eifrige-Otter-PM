@@ -75,13 +75,8 @@ if ($funktion == "get_notifications") {
     }
 
 }elseif ($funktion == "get_current_user") {
-	echo "test";
 	session_start();
 	$user_name = $_SESSION["login_user"];
-	respond_json([
-		"tmp" => $user_name
-	]);
-	exit;
 	$result = sql_querry("SELECT * FROM user WHERE benutzername = \"$user_name\"");
 	respond_json([
 		"user" => $result[0]
@@ -154,10 +149,10 @@ if ($funktion == "get_notifications") {
 
 	$now = new DateTime();
 
-	$result = sql_querry("SELECT geburtstag FROM user WHERE id = \"$user_id\"")
-	$bday = new DateTime($result[0]["geburtstag"])
+	$result = sql_querry("SELECT geburtstag FROM user WHERE id = \"$user_id\"");
+	$bday = new DateTime($result[0]["geburtstag"]);
 	if ($now->getTimestamp() - $bday->getTimestamp() < 567648000){
-		$t = date("H:i")
+		$t = date("H:i");
 		if($t < "06:00" ||$t > "22:00") {
 			respond_json([
 				"err" => "a young user cant login before 06:00 or after 22:00"
