@@ -150,7 +150,7 @@ if ($funktion == "get_notifications") {
 	$t = date("Y-m-d H-i-s");
 	$now = new DateTime();
 
-	$result = sql_querry("SELECT zeitpunkt FROM zeiterfassung WHERE benutzer_id = \"$user_id\" ORDER BY zeitpunkt DESC LIMIT 1");
+	$result = sql_querry("SELECT zeitpunkt FROM zeiterfassung WHERE benutzer_id = \"$user_id\" and aktion = \"Gehen\" ORDER BY zeitpunkt DESC LIMIT 1");
 	$letzte_zeit = new DateTime($result[0]["zeitpunkt"]);
 
 	$interval = $now->getTimestamp() - $letzte_zeit->getTimestamp();
