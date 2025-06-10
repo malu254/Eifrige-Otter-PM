@@ -46,23 +46,23 @@ admin/admin
 
 ## Funktionale Anforderungen | 4/17
 
-- [ ] Nutzer müssen benachrichtigt werden, wenn sie ihre Arbeitszeit überschreiten
+- [x] Nutzer müssen benachrichtigt werden, wenn sie ihre Arbeitszeit überschreiten
 - [x] Nutzer müssen angelegt werden können (HR)
 - [x] Nutzer müssen Passwort ändern können (Mitarbeiter, HR)
-- [ ] Nutzer muss initiales Passwort hinzufügen
+- [x] Nutzer muss initiales Passwort hinzufügen
 - [x] Admin kann Nutzer bearbeiten, löschen, hinzufügen
 - [x] Sprache muss gewechselt werden können, ohne Neustart
 - [x] Terminals in Büroräumen erforderlich
-- [ ] Erinnerung bei Überschreitung/Unterschreitung der Arbeitszeit
+- [x] Erinnerung bei Überschreitung/Unterschreitung der Arbeitszeit
 - [ ] Einhaltung der Ruhezeit nach Arbeitsschutzgesetz (min. 11h)
 - [ ] Max. Wochenarbeitszeit nur mit Genehmigung überschreitbar
 - [ ] Stempeln am Wochenende und an Feiertagen blockieren
-- [ ] Nur 6–22 Uhr stempeln können
+- [x] Nur 6–22 Uhr stempeln können
 - [ ] Dokumentation außerhalb der regulären Zeiten
-- [ ] Pausenhinweise gemäß Arbeitszeitdauer
-- [ ] Automatisches Pausenabzug
-- [ ] Mitarbeiter unter 13 dürfen nicht angelegt werden
-- [ ] Arbeitszeitenbeschränkungen für 13-18-Jährige
+- [x] Pausenhinweise gemäß Arbeitszeitdauer
+- [x] Automatisches Pausenabzug
+- [x] Mitarbeiter unter 13 dürfen nicht angelegt werden
+- [x] Arbeitszeitenbeschränkungen für 13-18-Jährige
 
 
 ## Constraints | 0/7
@@ -70,41 +70,41 @@ admin/admin
 - [ ] Projektabschluss innerhalb von 24 Wochen
 - [ ] Einhaltung des Arbeitszeitschutzgesetzes
 - [ ] Einhaltung des Jugendarbeitsgesetzes
-- [ ] Meilensteine und Abgabetermine
-- [ ] Vollständige Dokumentation
+- [x] Meilensteine und Abgabetermine
+- [x] Vollständige Dokumentation
 - [ ] Arbeitszeiten außerhalb 6-22 Uhr dokumentieren
 - [ ] Nicht deaktivierbare Benachrichtigungen
 
 ## Priorität 1 | 0/11
 
-- [ ] Vollständiges Pflichtenheft/Product Backlog
-- [ ] Projektcontrolling zur Fortschrittsüberwachung
-- [ ] Qualitätssicherungskonzept
-- [ ] Risikomanagement inkl. eingetretener Risiken
-- [ ] Kommunikationskonzept für Mitarbeiter
+- [x] Vollständiges Pflichtenheft/Product Backlog
+- [x] Projektcontrolling zur Fortschrittsüberwachung
+- [x] Qualitätssicherungskonzept
+- [x] Risikomanagement inkl. eingetretener Risiken
+- [x] Kommunikationskonzept für Mitarbeiter
 - [ ] Schulungskonzept für Mitarbeiter
 - [ ] Übersicht notwendiger Beistellungen der BBQ GmbH
-- [ ] Beschreibung des Erweiterungspotenzials
-- [ ] Fertig entwickelte Softwarelösung
-- [ ] Kritische Reflexion & Lessons Learned
-- [ ] Abgabe des vollständigen Projektportfolios
+- [x] Beschreibung des Erweiterungspotenzials
+- [x] Fertig entwickelte Softwarelösung
+- [x] Kritische Reflexion & Lessons Learned
+- [x] Abgabe des vollständigen Projektportfolios
 
 ## Priorität 2 | 1/5
 
-- [ ] Individuelle Passwortvergabe beim ersten Start
-- [ ] Warnung bei drohender Verletzung des Arbeitszeitgesetzes
-- [ ] Anbindung an Zeiterfassungsterminals im Büro
+- [x] Individuelle Passwortvergabe beim ersten Start
+- [x] Warnung bei drohender Verletzung des Arbeitszeitgesetzes
+- [x] Anbindung an Zeiterfassungsterminals im Büro
 - [x] Einhaltung des Zeitrahmens von 6–22 Uhr
-- [ ] Berücksichtigung minderjähriger Mitarbeiter
+- [x] Berücksichtigung minderjähriger Mitarbeiter
 
 
 
 ## Priorität 3 | 1/5
 
 - [ ] Einhaltung des deutschen Arbeitszeitgesetzes (ArbZG)
-- [ ] Definition eines Vorgehensmodells mit Meilensteinen
-- [ ] Ausgearbeiteter Zeitplan
-- [ ] Detaillierte Budgetkalkulation
+- [x] Definition eines Vorgehensmodells mit Meilensteinen
+- [x] Ausgearbeiteter Zeitplan
+- [x] Detaillierte Budgetkalkulation
 - [x] Prototypische Umsetzung (Mockups, Wireframes)
 
 ---
