@@ -85,8 +85,8 @@ error_reporting(E_ALL);
                     $ersterLogin = 1;
                     $initAnwesenheit = 0;
                     // Benutzer einfügen
-                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, lang, ersterLogin, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                    $stmt->bind_param("sssssii", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $sprache, $ersterLogin, $initAnwesenheit);
+                    $stmt = $conn->prepare("INSERT INTO user (benutzername, passwort, geburtstag, sollArbeitszeit, lang, ersterLogin, status, konto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    $stmt->bind_param("sssssiii", $benutzer, $passwort, $geburtstag, $sollArbeitszeit, $sprache, $ersterLogin, $initAnwesenheit, $initAnwesenheit);
                     $stmt->execute();
                     $stmt->close();
                     header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
