@@ -140,6 +140,13 @@ if ($funktion == "get_notifications") {
 		exit;
 	}
 
+	if (date("N") >= 6){
+		respond_json([
+			"err" => "it is a weekend"
+		]);
+		exit;
+	}
+
 	$t = date("Y-m-d H-i-s");
 	$now = new DateTime();
 
