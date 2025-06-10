@@ -176,6 +176,11 @@ def evaluate_current_day(work_day, user:dict,arbeits_zeit):
 
 def handle_user(user:dict) :
 
+    if datetime.today().time().hour == 0 and datetime.today().time().minute <= 5:
+        current_konto = user["konto"]
+        current_konto -= float(user["sollArbeitszeit"]/5)
+        cursor.execute("UPDATE user SET konto = %s WHERE id = %s",(current_konto,user["id"]))
+
     #return a dict key = date values = [(aktion,time)]
     worked_days = get_worked_days(user["id"])
     
