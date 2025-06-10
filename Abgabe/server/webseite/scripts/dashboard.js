@@ -166,31 +166,53 @@ function load_notifications() {
             const wrapper = document.createElement("div");
             wrapper.className = "d-flex justify-content-between align-items-center border-bottom py-2";
 
-            const message = document.createElement("div");
-            const now = new Date();
-            const timeString = now.toLocaleTimeString();
-            const translatedText = (translations[notification.text] || notification.text) + " " + timeString;
+            // kommentare für mich zum besseren erständis
+
+            // container nachricht
+            const notificationItem = document.createElement("div");
+            notificationItem.className = "d-flex flex-column";
+
+            // zeit / buttons
+            const timeRow = document.createElement("div");
+            timeRow.className = "d-flex justify-content-between align-items-start";
+
+            // zeit element
+            const time = document.createElement("time");
+            time.className = "text-muted";
+            time.style.fontSize = "smaller";
+            time.innerText = notification.erzeugt_am;
+
+            // nachticht
+            const message = document.createElement("p");
+            message.className = "mb-0 mt-1";
+            const translatedText = (translations[notification.text] || notification.text);
             message.innerText = translatedText;
 
+            // gesehen button
             const seenButton = document.createElement("button");
             seenButton.className = "btn btn-sm btn-outline-secondary";
             seenButton.title = "Als gesehen markieren";
+            seenButton.innerHTML = '<i class="bi bi-eye"></i>';
 
-            const icon = document.createElement("i");
-            icon.className = "bi bi-eye";
-            seenButton.appendChild(icon);
-
+            // wenn gesehen, dann nich anzeigen
             if (notification.gesehen == 1) {
                 seenButton.disabled = true;
                 wrapper.classList.add("text-muted");
+                message.classList.add("text-muted");
             } else {
                 seenButton.addEventListener("click", () => {
                     mark_as_seen(notification.id, wrapper);
                 });
             }
 
-            wrapper.appendChild(message);
+            // alles drawen
+            timeRow.appendChild(time);
+            notificationItem.appendChild(timeRow);
+            notificationItem.appendChild(message);
+            
+            wrapper.appendChild(notificationItem);
             wrapper.appendChild(seenButton);
+            
             note_body.appendChild(wrapper);
         });
 
