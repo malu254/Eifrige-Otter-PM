@@ -14,6 +14,9 @@ async function get_user() {
         })
     })
 
+    console.log(await respons.text());
+    
+
     if (!respons.ok) throw new Error("respons error")
     let data = await respons.json()
     user = data.user

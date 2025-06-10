@@ -75,6 +75,7 @@ if ($funktion == "get_notifications") {
     }
 
 }elseif ($funktion == "get_current_user") {
+	echo "test";
 	session_start();
 	$user_name = $_SESSION["login_user"];
 	respond_json([
