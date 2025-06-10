@@ -141,6 +141,18 @@ if ($funktion == "get_notifications") {
 	}
 
 	$t = date("Y-m-d H-i-s");
+
+	$result = sql_querry("SELECT zeitpunkt FROM zeiterfassung WHERE benutzer_id = \"$user_id\" ORDER BY zeitpunkt DESC LIMIT 1");
+	$zeit_str = $result[0]["zeitpunkt"];
+	$letzte_zeit = new DateTime($zeit_str);
+	if ($t->diff($letzte_zeit)->h < 11 )
+	{
+		respond_json([
+			"err" => "time since last gehen too small"
+		]);
+		exit;
+	}
+
 	sql_querry("insert into zeiterfassung (benutzer_id,aktion,zeitpunkt) values (\"$user_id\",\"Kommen\",\"$t\")");
 
 	$result = sql_querry("UPDATE user SET status = 1 WHERE id = \"$user_id\"");

@@ -4,7 +4,7 @@ from datetime import datetime,timedelta, time
 conn = mysql.connector.connect(
     host="localhost",
     database="zeitmanagement",
-    user="webuser",
+    user="admin",
     password="Projektmanagement"
 )
 
@@ -17,10 +17,14 @@ def fix_no_gehen(work_day, arbeits_zeit):
 
     soll_arbeits_zeit = timedelta(hours=int(user["sollArbeitszeit"])/5)
     diff = soll_arbeits_zeit - arbeits_zeit
+    gehen_time = work_day[-1][1]+diff;
 
     
     print(f"arbeits zeit: {arbeits_zeit} soll arbeits zeit: {soll_arbeits_zeit} diff: {diff}")
     print(f"inserting at {work_day[-1][1]+diff}")
+    if (gehen_time.date() != work_day[-1][1].date()) :
+        gehen_time = datetime.combine(work_day[-1][1].date(), time(23,59))
+    
 
     cursor.execute("INSERT INTO zeiterfassung (benutzer_id,aktion,zeitpunkt) VALUES (%s,%s,%s)",(user["id"],"Gehen",work_day[-1][1]+diff))
     conn.commit()
