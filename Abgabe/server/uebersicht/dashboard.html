@@ -250,7 +250,7 @@
                 </strong></p>-->
               <p class="mb-0"><strong>
                   <?= $texts['flexitime_account']?>:
-                  <?= htmlspecialchars($userData['konto'] ?? '-') ?>
+                  <?= htmlspecialchars(round($userData['konto'] ?? '-',2)) ?>
                   <?= $texts['hours']?>
                 </strong></p>
             </div>
