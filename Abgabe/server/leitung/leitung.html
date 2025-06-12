@@ -142,6 +142,7 @@
               <th><?= $texts['working_time_target']?></th>
               <th><?= $texts['underage']?></th>
               <th><?= $texts['language']?></th>
+              <th><?= $texts['password']?></th>
               <th><?= $texts['remove']?></th>
             </tr>
           </thead>
@@ -155,9 +156,19 @@
                   <td><?= htmlspecialchars((new DateTime($eintrag['geburtstag']))->diff(new DateTime())->y < 18 ? $texts['yes'] : $texts['no']) ?></td>
                   <td><?= htmlspecialchars($eintrag['lang'] ?? '-') ?></td>
                   <td>
+                    <form method="post">
+                      <div class="d-flex mb-2">
+                          <input minlength="4" maxlength="35" name="passwortFormular" type="password" class="form-control" id="newPasswordInput" placeholder="<?= $texts['new_password']?>">
+                          <button type="submit" id="submitNewPassword" class="btn btn-primary btn-sm ms-2">Ok</button>
+                          <input type="hidden" name="userID" value="<?= htmlspecialchars($eintrag['id']) ?>">
+                      </div>
+                    </form>
+                  <div id="message" class="mt-2"></div>
+                    </td>
+                  <td>
                     <form method="post" onsubmit="return confirm('<?= htmlspecialchars(addslashes($texts['confirm_delete_user'])) ?>');">
                       <input type="hidden" name="benutzername_loeschen" value="<?= htmlspecialchars($eintrag['benutzername']) ?>">
-                      <button type="submit" class="btn btn-sm btn-danger"><?= $texts['remove']?></button>
+                      <button type="submit" class="btn btn-sm btn-danger w-100"><?= $texts['remove']?></button>
                     </form>
                   </td>
                 </tr>
@@ -170,10 +181,7 @@
                 <td>
                   <input type="text" maxlength="35" name="benutzernameEingabe" class="form-control form-control-sm" placeholder="<?= $texts['username']?>" required>
                 </td>
-                <td>
-                  <input type="password" minlength="4" maxlength="35" name="passwortEingabe" class="form-control form-control-sm" placeholder="<?= $texts['temporary_password']?>" required>
-                </td>
-                <td>
+                <td colspan="2">
                   <select name="sollArbeitszeitEingabe" class="form-select form-select-sm">
                     <option value="30">30 <?= $texts['hours']?></option>
                     <option value="35">35 <?= $texts['hours']?></option>
@@ -189,7 +197,10 @@
                     <option value="en"><?= $texts['english']?></option>
                   </select>
                 </td>
-                <td colspan="1">
+                <td>
+                  <input type="password" minlength="4" maxlength="35" name="passwortEingabe" class="form-control form-control-sm" placeholder="<?= $texts['temporary_password']?>" required>
+                </td>
+                <td>
                   <button type="submit" name="benutzerHinzufuegen" class="btn btn-sm btn-success w-100"><?= $texts['add_user']?></button>
                 </td>
               </form>

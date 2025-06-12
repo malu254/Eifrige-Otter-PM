@@ -36,32 +36,47 @@ error_reporting(E_ALL);
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         
         if (isset($_POST['benutzername_loeschen'])) {
-        $benutzername_loeschen = $_POST['benutzername_loeschen'];
+            $benutzername_loeschen = $_POST['benutzername_loeschen'];
 
-        // Benutzer-ID ermitteln
-        $stmt_id = $conn->prepare("SELECT id FROM user WHERE benutzername = ?");
-        $stmt_id->bind_param("s", $benutzername_loeschen);
-        $stmt_id->execute();
-        $stmt_id->bind_result($benutzer_id);
-        $stmt_id->fetch();
-        $stmt_id->close();
+            // Benutzer-ID ermitteln
+            $stmt_id = $conn->prepare("SELECT id FROM user WHERE benutzername = ?");
+            $stmt_id->bind_param("s", $benutzername_loeschen);
+            $stmt_id->execute();
+            $stmt_id->bind_result($benutzer_id);
+            $stmt_id->fetch();
+            $stmt_id->close();
 
-        if (!empty($benutzer_id)) {
-            // Zeiterfassung des Benutzers löschen
-            $stmt2 = $conn->prepare("DELETE FROM zeiterfassung WHERE benutzer_id = ?");
-            $stmt2->bind_param("i", $benutzer_id);
-            $stmt2->execute();
-            $stmt2->close();
+            if (!empty($benutzer_id)) {
+                // Zeiterfassung des Benutzers löschen
+                $stmt2 = $conn->prepare("DELETE FROM zeiterfassung WHERE benutzer_id = ?");
+                $stmt2->bind_param("i", $benutzer_id);
+                $stmt2->execute();
+                $stmt2->close();
 
-            // Benutzer in Tabelle löschen
-            $stmt = $conn->prepare("DELETE FROM user WHERE benutzername = ?");
-            $stmt->bind_param("s", $benutzername_loeschen);
-            $stmt->execute();
-            $stmt->close();
+                // Benutzer in Tabelle löschen
+                $stmt = $conn->prepare("DELETE FROM user WHERE benutzername = ?");
+                $stmt->bind_param("s", $benutzername_loeschen);
+                $stmt->execute();
+                $stmt->close();
+                header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
+                exit;
+            }
+        }
+
+        if (isset($_POST['passwortFormular'])) {
+            $neuesPasswort = $_POST['passwortFormular'];
+            $userID = $_POST['userID'];
+
+
+            $stmt_id = $conn->prepare("UPDATE user SET passwort = ? WHERE id = ?");
+            $stmt_id->bind_param("ss", $neuesPasswort, $userID);
+            $stmt_id->execute();
+            $stmt_id->close();
+
+
             header('Location: ' . $_SERVER['PHP_SELF']); // damit post formular "verschiwndet"
             exit;
         }
-    }
 
 
         if (isset($_POST['benutzerHinzufuegen'])) {
@@ -117,7 +132,7 @@ error_reporting(E_ALL);
 
     // Einträge für Tabelle holen
     $eintraege = [];
-    $stmt = $conn->prepare("SELECT benutzername, status,sollArbeitszeit, fehlzeit, geburtstag, lang FROM user");
+    $stmt = $conn->prepare("SELECT id, benutzername, status,sollArbeitszeit, fehlzeit, geburtstag, lang FROM user");
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
