@@ -15,7 +15,9 @@
 
 [Vorgabe PDF](Vorgabe/Portfolio%20-%20Projektmanagement%20Stuttgart.pdf)
 
-[Product Backlog](https://eifrige-otter-pm.atlassian.net/jira/software/projects/ECS/boards/1)
+[Product Backlog Jira](https://eifrige-otter-pm.atlassian.net/jira/software/projects/ECS/boards/1)
+
+[Product Backlog Trello](https://trello.com/b/WEibGNQ6/eifrigeotter-projektmanagement)
 
 **DHBW Moodle Kurs:**  
 ➡️ [Projektmanagement auf Moodle](https://elearning.dhbw-stuttgart.de/moodle/course/view.php?id=21296)
@@ -27,10 +29,10 @@ admin/admin
 
 ---
 
-## Technische Anforderungen | 8/12
+## Technische Anforderungen | 12/12
 
 - [x] Nutzer müssen sich einloggen können (Security)
-- [ ] Arbeitszeiten müssen exportiert werden können
+- [x] Arbeitszeiten müssen exportiert werden können
 - [x] Es muss eine API geben, um auf das System zuzugreifen
 - [x] Software sollte in HTML/CSS/JavaScript geschrieben werden
 - [x] Lauffähiger Web-Server zur Hosting der Zeiterfassung erforderlich
@@ -44,7 +46,7 @@ admin/admin
 - [x] Doppeleingaben blockieren
 - [x] Arbeitszeitmodellzuweisung für Mitarbeiter
 
-## Funktionale Anforderungen | 4/17
+## Funktionale Anforderungen | 17/17
 
 - [x] Nutzer müssen benachrichtigt werden, wenn sie ihre Arbeitszeit überschreiten
 - [x] Nutzer müssen angelegt werden können (HR)
@@ -54,42 +56,42 @@ admin/admin
 - [x] Sprache muss gewechselt werden können, ohne Neustart
 - [x] Terminals in Büroräumen erforderlich
 - [x] Erinnerung bei Überschreitung/Unterschreitung der Arbeitszeit
-- [ ] Einhaltung der Ruhezeit nach Arbeitsschutzgesetz (min. 11h)
-- [ ] Max. Wochenarbeitszeit nur mit Genehmigung überschreitbar
-- [ ] Stempeln am Wochenende und an Feiertagen blockieren
+- [x] Einhaltung der Ruhezeit nach Arbeitsschutzgesetz (min. 11h)
+- [x] Max. Wochenarbeitszeit nur mit Genehmigung überschreitbar
+- [x] Stempeln am Wochenende und an Feiertagen blockieren
 - [x] Nur 6–22 Uhr stempeln können
-- [ ] Dokumentation außerhalb der regulären Zeiten
+- [x] Dokumentation außerhalb der regulären Zeiten
 - [x] Pausenhinweise gemäß Arbeitszeitdauer
 - [x] Automatisches Pausenabzug
 - [x] Mitarbeiter unter 13 dürfen nicht angelegt werden
 - [x] Arbeitszeitenbeschränkungen für 13-18-Jährige
 
 
-## Constraints | 0/7
+## Constraints | 7/7
 
-- [ ] Projektabschluss innerhalb von 24 Wochen
-- [ ] Einhaltung des Arbeitszeitschutzgesetzes
-- [ ] Einhaltung des Jugendarbeitsgesetzes
+- [x] Projektabschluss innerhalb von 24 Wochen
+- [x] Einhaltung des Arbeitszeitschutzgesetzes
+- [x] Einhaltung des Jugendarbeitsgesetzes
 - [x] Meilensteine und Abgabetermine
 - [x] Vollständige Dokumentation
-- [ ] Arbeitszeiten außerhalb 6-22 Uhr dokumentieren
-- [ ] Nicht deaktivierbare Benachrichtigungen
+- [x] Arbeitszeiten außerhalb 6-22 Uhr dokumentieren
+- [x] Nicht deaktivierbare Benachrichtigungen
 
-## Priorität 1 | 0/11
+## Priorität 1 | 11/11
 
 - [x] Vollständiges Pflichtenheft/Product Backlog
 - [x] Projektcontrolling zur Fortschrittsüberwachung
 - [x] Qualitätssicherungskonzept
 - [x] Risikomanagement inkl. eingetretener Risiken
 - [x] Kommunikationskonzept für Mitarbeiter
-- [ ] Schulungskonzept für Mitarbeiter
-- [ ] Übersicht notwendiger Beistellungen der BBQ GmbH
+- [x] Schulungskonzept für Mitarbeiter
+- [x] Übersicht notwendiger Beistellungen der BBQ GmbH
 - [x] Beschreibung des Erweiterungspotenzials
 - [x] Fertig entwickelte Softwarelösung
 - [x] Kritische Reflexion & Lessons Learned
 - [x] Abgabe des vollständigen Projektportfolios
 
-## Priorität 2 | 1/5
+## Priorität 2 | 5/5
 
 - [x] Individuelle Passwortvergabe beim ersten Start
 - [x] Warnung bei drohender Verletzung des Arbeitszeitgesetzes
@@ -99,9 +101,9 @@ admin/admin
 
 
 
-## Priorität 3 | 1/5
+## Priorität 3 | 5/5
 
-- [ ] Einhaltung des deutschen Arbeitszeitgesetzes (ArbZG)
+- [x] Einhaltung des deutschen Arbeitszeitgesetzes (ArbZG)
 - [x] Definition eines Vorgehensmodells mit Meilensteinen
 - [x] Ausgearbeiteter Zeitplan
 - [x] Detaillierte Budgetkalkulation
