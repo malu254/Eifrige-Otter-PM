@@ -23,9 +23,7 @@
 ➡️ [Projektmanagement auf Moodle](https://elearning.dhbw-stuttgart.de/moodle/course/view.php?id=21296)
 
 ### Wichtige Zugangsdaten
-test/test
-
-admin/admin
+Removed
 
 ---
 
